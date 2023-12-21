@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd_stdouts.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 01:07:41 by siun              #+#    #+#             */
-/*   Updated: 2023/12/20 17:48:25 by siun             ###   ########.fr       */
+/*   Updated: 2023/12/21 18:20:54 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	re_type_r_pipes(int filefd, int pipe_out)
 		close(filefd);
 		exit(errno);
 	}
+	close (filefd);
 }
 
 void	connect_last_out(int pipe_out, t_stdio *last_out)
