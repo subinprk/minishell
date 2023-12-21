@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:07:25 by subpark           #+#    #+#             */
-/*   Updated: 2023/12/20 17:40:20 by siun             ###   ########.fr       */
+/*   Updated: 2023/12/21 15:51:12 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,13 @@ void	update_redirfd(int *pipefd, t_stdio *stdios)
 {
 	t_stdio	*last_in;
 	t_stdio *last_out;
-	int		pipe_tmp[2];
 
-	pipe_tmp[0] = pipefd[0];
-	pipe_tmp[1] = pipefd[1];
 	last_in = find_last_in(stdios);
 	last_out = find_last_out(stdios);
 	if (last_in != NULL)
-	{
 		connect_last_in(pipefd[0], last_in);
-		close(pipe_tmp[0]);
-	}
 	if (last_out != NULL)
-	{
 		connect_last_out(pipefd[1], last_out);
-		close(pipe_tmp[1]);
-	}
 }
 
 // void	simple_cmd_action(t_cmd *cmd, int *pipefd, char **envp)
