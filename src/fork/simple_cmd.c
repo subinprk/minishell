@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:07:25 by subpark           #+#    #+#             */
-/*   Updated: 2023/12/21 15:51:12 by siun             ###   ########.fr       */
+/*   Updated: 2023/12/21 16:20:39 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	update_pipefd(int (*pipefd)[2], int pipe_exist, int old_pipe[2], int new_pi
 		(*pipefd)[0] = old_pipe[0];
 		dup2(old_pipe[0], 0);
 		close(old_pipe[1]);
+		close(old_pipe[0]);
 	}
 	if (pipe_exist != -1)
 	{
@@ -44,9 +45,11 @@ void	update_pipefd(int (*pipefd)[2], int pipe_exist, int old_pipe[2], int new_pi
 	else
 	{
 		(*pipefd)[1] = 1;
-		close(new_pipe[1]);
+	//	close(new_pipe[1]);
 	}
 	close(new_pipe[0]);
+	close(new_pipe[1]);
+	//close(old_pipe[0]);
 }
 
 void	update_redirfd(int *pipefd, t_stdio *stdios)
