@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2023/12/21 16:37:29 by subpark          ###   ########.fr       */
+/*   Updated: 2023/12/21 16:41:53 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio *stdios, char **envp)
 		update_redirfd(pipefd, stdios);
 		builtin = check_builtin(cmd->left_child);
 		if (builtin)
+		{
 			builtin_action(cmd->right_child, cmd->right_child->cmdstr);
+			exit(0);
+		}
 		else
 		{
 	 		print_error_cmd(cmd->left_child, envp);
