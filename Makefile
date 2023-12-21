@@ -6,7 +6,7 @@
 #    By: subpark <subpark@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 16:59:02 by subpark           #+#    #+#              #
-#    Updated: 2023/12/21 17:02:33 by subpark          ###   ########.fr        #
+#    Updated: 2023/12/21 17:15:47 by subpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,9 +55,7 @@ SRCS = src/builtins/unset.c src/builtins/env.c src/builtins/cd.c\
  src/generate_prompt.c\
  src/main.c\
  src/utils.c\
- src/utils2.c\
- \
- subdebug/node_check.c
+ src/utils2.c
 
 OBJS = $(SRCS:.c=.o)
 
