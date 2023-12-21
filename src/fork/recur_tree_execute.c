@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2023/12/21 16:41:53 by subpark          ###   ########.fr       */
+/*   Updated: 2023/12/21 16:46:17 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio *stdios, char **envp)
 			exec(cmd->right_child->cmdstr, envp);
 		}
 	}
-	waitpid(pid, NULL, WNOHANG);
+	waitpid(pid, NULL, WNOHANG);//might be in main function before generating prompt
 	if (pipefd[0] != -1)
 	{
 		close(old_pipe[0]);
