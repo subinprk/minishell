@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2023/12/14 17:14:55 by siun             ###   ########.fr       */
+/*   Updated: 2023/12/20 18:01:45 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,37 @@
 
 void	execute_simple_cmd(t_cmd *cmd, t_stdio *stdios, char **envp)
 {
-	int		pipefd[2];
-	int		builtin;
+	static int		pipefd[2] = {-1, -1};
+	static int		new_pipe[2];
+	int				old_pipe[2];
+	int				builtin;
+	pid_t			pid;
 
-	builtin = check_builtin(cmd->left_child);
-	if (!builtin)
-		print_error_cmd(cmd->left_child, envp);
-	if (cmd->pipe_exist != -1)
-		pipe_pipe(cmd, pipefd, stdios, envp);
-	else
-		pipe_end(cmd, pipefd, stdios, envp);
+	if (pipefd[0] != -1) ///for excepting the case of first time
+	{
+		old_pipe[0] = new_pipe[0];
+		old_pipe[1] = new_pipe[1];
+	}
+	if (pipe(new_pipe) == -1)
+		return (perror("Pipe: "));//exit with signals
+	pid = fork();
+	if (pid < 0)
+		return (perror("Pipe: "));
+	else if (pid == 0)
+	{
+		update_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
+		update_redirfd(pipefd, stdios);
+		builtin = check_builtin(cmd->left_child);
+		if (builtin)
+			builtin_action(cmd->right_child, cmd->right_child->cmdstr);
+		else
+		{
+	 		print_error_cmd(cmd->left_child, envp);
+			exec(cmd->right_child->cmdstr, envp);
+		}
+	}
+	waitpid(pid, NULL, WNOHANG);
+	write_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
 	free_stdios(stdios);
 	stdios = NULL;
 }
