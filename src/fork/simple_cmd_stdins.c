@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd_stdins.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:54:07 by siun              #+#    #+#             */
-/*   Updated: 2023/12/21 18:20:44 by subpark          ###   ########.fr       */
+/*   Updated: 2023/12/23 13:58:36 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,22 +82,3 @@ t_stdio	*find_last_in(t_stdio *stdios)
 	}
 	return (last_in);
 }
-
-// void	pipe_stdins(int *pipefd, t_stdio *stdios)
-// {
-// 	t_stdio	*last_in;
-// 	t_stdio	*curr;
-
-// 	last_in = NULL;
-// 	curr = stdios;
-// 	while (curr)
-// 	{
-// 		if (curr->re_type == REL_TYPE_L || curr->re_type == REL_TYPE_LL)
-// 			last_in = curr;
-// 		curr = curr->next_stdio;
-// 	}
-// 	if (last_in != NULL)
-// 		connect_stdins(last_in, pipefd);
-// 	else
-// 		return ;//useless, but afraid to remove pipefd parameter...
-// }
