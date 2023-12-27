@@ -39,6 +39,7 @@ SRCS = src/builtins/unset.c src/builtins/env.c src/builtins/cd.c\
  src/fork/simple_cmd_stdouts.c\
  src/fork/simple_cmd_tools.c\
  src/handle_signal.c\
+ src/parsing/ch_complete.c\
  src/parsing/get_a_command.c\
  src/parsing/lexical_analysis.c\
  src/parsing/syntax_analysis.c\
@@ -55,7 +56,6 @@ SRCS = src/builtins/unset.c src/builtins/env.c src/builtins/cd.c\
  src/main.c\
  src/utils.c\
  src/utils2.c\
- src/ch_complete.c\
  subdebug/node_check.c
  #src/parsing/chopping_str.c
 
