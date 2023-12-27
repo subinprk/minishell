@@ -194,4 +194,7 @@ int		find_next_redirection(int *token, int *i);
 void    handle_signal(int sign);
 void	set_signal(void);
 
+// ch_complete.c (FERDAWS)
+char	**input_validation(char *tmp);
+
 #endif

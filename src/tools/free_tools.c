@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:34:26 by subpark           #+#    #+#             */
-/*   Updated: 2023/12/21 18:13:57 by subpark          ###   ########.fr       */
+/*   Updated: 2023/12/11 17:56:35 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	free_stdios(t_stdio *stdios)
 	t_stdio	*curr;
 	t_stdio *next;
 
-	if (stdios)
-		return ;
 	curr = stdios;
 	while (curr)
 	{

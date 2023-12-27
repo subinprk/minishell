@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 16:30:36 by irivero-          #+#    #+#             */
-/*   Updated: 2023/12/23 14:02:22 by siun             ###   ########.fr       */
+/*   Updated: 2023/12/12 21:59:34 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	generate_prompt(void)
 	ft_putstr_fd(current_path, 1);
 	ft_putstr_fd("\033[0m", 1);
 	ft_putstr_fd("$", 1);
-	free(current_path);
 }
 
 /* reads a line from standard input and appends it to the content of line

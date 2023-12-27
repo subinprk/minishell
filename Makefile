@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: subpark <subpark@student.42.fr>            +#+  +:+       +#+         #
+#    By: siun <siun@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/21 16:59:02 by subpark           #+#    #+#              #
-#    Updated: 2023/12/21 17:15:47 by subpark          ###   ########.fr        #
+#    Created: 2023/11/22 15:14:43 by irivero-          #+#    #+#              #
+#    Updated: 2023/12/08 21:03:09 by siun             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,6 @@ SRCS = src/builtins/unset.c src/builtins/env.c src/builtins/cd.c\
  src/fork/simple_cmd_stdouts.c\
  src/fork/simple_cmd_tools.c\
  src/handle_signal.c\
- src/parsing/chopping_str.c\
  src/parsing/get_a_command.c\
  src/parsing/lexical_analysis.c\
  src/parsing/syntax_analysis.c\
@@ -55,7 +54,10 @@ SRCS = src/builtins/unset.c src/builtins/env.c src/builtins/cd.c\
  src/generate_prompt.c\
  src/main.c\
  src/utils.c\
- src/utils2.c
+ src/utils2.c\
+ src/ch_complete.c\
+ subdebug/node_check.c
+ #src/parsing/chopping_str.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -25,7 +25,7 @@ t_cmd	*extract_command(char *str)
 	if (str == NULL || str[0] == 0)
 		return (NULL);
 	cmd_tree = NULL;
-	chopped_str = chopping_str(str);
+	chopped_str = input_validation(str);
 	if (!chopped_str)
 		return (NULL);
 	token = token_data(chopped_str);
