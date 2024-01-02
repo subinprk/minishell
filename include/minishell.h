@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:52:41 by irivero-          #+#    #+#             */
-/*   Updated: 2023/12/20 16:19:59 by siun             ###   ########.fr       */
+/*   Updated: 2024/01/02 17:10:01 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define REL_TYPE_RR 2
 # define REL_TYPE_L 3
 # define REL_TYPE_LL 4
+
+# define _XOPEN_SOURCE 700
 
 # include <stdlib.h>
 # include <unistd.h>
