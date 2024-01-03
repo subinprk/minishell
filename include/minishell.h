@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:52:41 by irivero-          #+#    #+#             */
-/*   Updated: 2024/01/02 17:10:01 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/03 16:39:06 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,8 +193,9 @@ int		find_next_redirection(int *token, int *i);
 
 
 // handle_signal.c
-void    handle_signal(int sign);
-void	set_signal(void);
+void	set_signals_interactive(void);
+//void	set_signals_noninteractive(void);
+void	print_prompt();
 
 // ch_complete.c (FERDAWS)
 char	**input_validation(char *tmp);

@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:48:01 by subpark           #+#    #+#             */
-/*   Updated: 2023/12/23 15:11:01 by siun             ###   ########.fr       */
+/*   Updated: 2024/01/03 16:33:10 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ void	interactive_mode(t_cmd **tree, char **envp)
 
 	while (1)
 	{
+		set_signals_interactive();
 		print_prompt();
 		tmp = readline(" ");
+		if (!tmp)
+			exit(0);//have to add some exiting things
 		*tree = extract_command(tmp);
 		search_tree(*tree, envp);
 //		waitpid(0, NULL, WNOHANG);
