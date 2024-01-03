@@ -15,21 +15,22 @@
 int main(int argc, char **argv, char **envs)
 {
 //	char	**line;
-	int		index;
+	int		index, i;
 	char	*tmp;
 	char	**envp;
 	t_cmd	*tree;
 
 //	line = NULL;
-
+	if (argc && argv)
 
 //subin: should be initialised as a function for norminette later
+	i = 0;
 	index = 0;
 	g_envp = cpy_full_2d_array(envs);
 	envp = paths_array(envs);
 	set_signal();
 
-	while(argc && argv[0] != NULL)
+	while(/*argc && argv[0] != NULL*/ i < 5)
 	{
 		//get_line(line);
 		//tree = extract_command(line[index]);
@@ -40,6 +41,7 @@ int main(int argc, char **argv, char **envs)
 		index ++;
 		free(tmp);
 		free_tree(tree);
+		i++;
 	}
 //also freeing shoud be in different function
 	free_2d(envp);
