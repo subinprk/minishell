@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: siun <siun@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/22 15:14:43 by irivero-          #+#    #+#              #
-#    Updated: 2023/12/08 21:03:09 by siun             ###   ########.fr        #
+#    Created: 2023/12/21 16:59:02 by subpark           #+#    #+#              #
+#    Updated: 2024/01/02 17:10:54 by subpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,8 +56,7 @@ SRCS = src/builtins/unset.c src/builtins/env.c src/builtins/cd.c\
  src/main.c\
  src/utils.c\
  src/utils2.c\
- subdebug/node_check.c
- #src/parsing/chopping_str.c
+src/signals/signal.c
 
 OBJS = $(SRCS:.c=.o)
 

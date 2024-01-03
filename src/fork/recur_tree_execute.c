@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2023/12/20 18:01:45 by siun             ###   ########.fr       */
+/*   Updated: 2024/01/02 17:31:20 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,38 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio *stdios, char **envp)
 
 	if (pipefd[0] != -1) ///for excepting the case of first time
 	{
-		old_pipe[0] = new_pipe[0];
-		old_pipe[1] = new_pipe[1];
+		old_pipe[0] = dup(new_pipe[0]);
+		old_pipe[1] = dup(new_pipe[1]);
+		close(new_pipe[0]);
+		close(new_pipe[1]);
 	}
 	if (pipe(new_pipe) == -1)
 		return (perror("Pipe: "));//exit with signals
 	pid = fork();
 	if (pid < 0)
-		return (perror("Pipe: "));
+		return (perror("Fork: "));
 	else if (pid == 0)
 	{
 		update_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
 		update_redirfd(pipefd, stdios);
 		builtin = check_builtin(cmd->left_child);
 		if (builtin)
+		{
 			builtin_action(cmd->right_child, cmd->right_child->cmdstr);
+			exit(errno);
+		}
 		else
 		{
 	 		print_error_cmd(cmd->left_child, envp);
 			exec(cmd->right_child->cmdstr, envp);
 		}
 	}
-	waitpid(pid, NULL, WNOHANG);
+//	waitpid(pid, NULL, WNOHANG);//might be in main function before generating prompt
+	if (pipefd[0] != -1)
+	{
+		close(old_pipe[0]);
+		close(old_pipe[1]);
+	}
 	write_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
 	free_stdios(stdios);
 	stdios = NULL;
