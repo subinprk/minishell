@@ -25,9 +25,9 @@ RESET = \033[0m
 
 CC = cc -g
 
-SRCS_DIR = src/
-
-SRCS = src/builtins/unset.c src/builtins/env.c src/builtins/cd.c\
+SRCS = src/builtins/unset.c\
+ src/builtins/env.c\
+ src/builtins/cd.c\
  src/builtins/echo.c\
  src/builtins/exit.c\
  src/builtins/export.c\
@@ -56,7 +56,7 @@ SRCS = src/builtins/unset.c src/builtins/env.c src/builtins/cd.c\
  src/main.c\
  src/utils.c\
  src/utils2.c\
-src/signals/signal.c
+ src/signals/signal.c
 
 OBJS = $(SRCS:.c=.o)
 

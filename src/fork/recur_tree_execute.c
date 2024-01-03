@@ -48,7 +48,7 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio *stdios, char **envp)
 			exec(cmd->right_child->cmdstr, envp);
 		}
 	}
-//	waitpid(pid, NULL, WNOHANG);//might be in main function before generating prompt
+	waitpid(pid, NULL, WNOHANG);//might be in main function before generating prompt
 	if (pipefd[0] != -1)
 	{
 		close(old_pipe[0]);
