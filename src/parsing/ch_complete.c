@@ -1,4 +1,8 @@
-#include "../../include/minishell.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+#include <stdlib.h>
 
 typedef struct	s_data
 {
@@ -117,9 +121,14 @@ int	ft_chopper(t_data *data, char *tmp, int k)
 		return (-1);
 	while (tmp[i] == ' ')
 		i++;
+	if (tmp[i] == '\0')
+	{
+		data->array[k] = NULL;
+		return (0);
+	}
 	tmp = tmp + i;
 	i = 0;
-	while (tmp[i] != '\0' && tmp[i] != ' ' && tmp[i] != '=' && tmp[i] != '\"' && tmp[i] != '\'')
+	while (tmp[i] != '\0' && tmp[i] != ' ' && tmp[i] != '=' && tmp[i] != '\"' && tmp[i] != '\'' && tmp[i] != '<' && tmp[i] != '>' && tmp[i] != '|')
 		i++;
 	if (tmp[0] == '\'')
 	{
@@ -143,9 +152,14 @@ int	ft_chopper(t_data *data, char *tmp, int k)
 		tmp = tmp + i;
 		i = 0;
 	}
-	else if (tmp[0] != '=' && tmp[0] != '\0')
+	else if (tmp[0] != '=' && tmp[0] != '\0' && tmp[0] != '<' && tmp[0] != '>' && tmp[0] != '|')
 		ft_strcpy(data, tmp, i, k);
-	else if (tmp[0] == '=')
+	else if ((tmp[0] == '>' && tmp[1] == '>') || (tmp[0] == '<' && tmp[1] == '<'))
+	{
+		ft_strcpy(data, tmp, 2, k);
+		i += 2;
+	}
+	else if (tmp[0] == '=' || tmp[0] == '<' || tmp[0] == '>' || tmp[0]  == '|')
 	{
 		ft_strcpy(data, tmp, 1, k);
 		i++;
@@ -165,6 +179,14 @@ int	word_counter(t_data *data)
 		return (0);
 	while (data->tmp[i] != '\0')
 	{
+		while (data->tmp[i] != '|' && data->tmp[i] != '>' && data->tmp[i] != '<' && data->tmp[i] != '=' && data->tmp[i] != '\"' && data->tmp[i] != '\'' && data->tmp[i] != '\0' && data->tmp[i] != ' ')
+		{
+			i++;
+		}
+		if ((data->tmp[i] == '|' || data->tmp[i] == '>' || data->tmp[i] == '<' || data->tmp[i] == '=' || data->tmp[i] == '\"' || data->tmp[i] == '\'') && data->tmp[i - 1] != ' ')
+			k++;
+		if ((data->tmp[i] == '|' || data->tmp[i] == '>' || data->tmp[i] == '<' || data->tmp[i] == '=' || data->tmp[i] == '\"' || data->tmp[i] == '\'') && data->tmp[i + 1] != ' ')
+			k++;
 		if (data->tmp[i] == '\"')
 		{
 			k++;
@@ -181,6 +203,9 @@ int	word_counter(t_data *data)
 				i++;
 			i++;
 		}
+		
+		if ((data->tmp[i] == '<' && data->tmp[i + 1] == '<') || (data->tmp[i] == '>' && data->tmp[i + 1] == '>'))
+			i++;
 		if (data->tmp[i] == ' ' && data->tmp[i + 1] != ' ' && \
 		data->tmp[i + 1] != '\0' && data->tmp[i + 1] != '=')
 			k++;
@@ -200,16 +225,28 @@ char	**input_validation(char *tmp)
 	t_data	data;
 	data.tmp = tmp;
 	if (quo_num(tmp, &data) == -1)
+	{
+		free(data.tmp);
 		return (NULL);
+	}
 	data.word_count = word_counter(&data);
 	if (data.word_count == 0)
+	{
+		free(data.tmp);
 		return (NULL);
+	}
 	if (data.sqn + data.dqn > 0)
 		if (quo_order(tmp, &data) == -1)
+		{
+			free(data.tmp);
 			return (NULL);
-	data.array = malloc((data.word_count + 3) * sizeof(char *));
+		}
+	data.array = malloc((data.word_count + 2) * sizeof(char *));
 	if (ft_chopper(&data, tmp, 0) == -1)
+	{
+		free(data.tmp);
 		return (NULL);
+	}
 	return (data.array);
 }
 
