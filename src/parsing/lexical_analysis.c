@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 02:36:57 by siun              #+#    #+#             */
-/*   Updated: 2023/12/07 18:03:20 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/05 16:30:45 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	*token_data(char **chopped_str)
 	while (i < token_num)
 	{
 		token[i] = allocate_token(chopped_str[i]);
+//		printf("token number : %d\n", token[i]);
 		i ++;
 	}
 	token[token_num] = TOK_NULL_HANDLE;

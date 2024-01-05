@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_analysis.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 03:40:29 by siun              #+#    #+#             */
-/*   Updated: 2023/12/15 14:50:55 by siun             ###   ########.fr       */
+/*   Updated: 2024/01/05 16:59:09 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	syntax_redirects(char **cmd_line, int *token, int *i, t_cmd **node)
 	next_redirect_index = find_next_redirection(token, i);
 	if (next_redirect_index != -1)
 		i[1] = next_redirect_index - 1;
-	if (syntax_simple_redirect(cmd_line, i, &((*node)->left_child)) == -1)
+	if (syntax_simple_redirect(cmd_line, /*token,*/ i, &((*node)->left_child)) == -1)
 		return (-1);
 	if (next_redirect_index != -1)
 	{

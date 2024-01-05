@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd_stdins.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:54:07 by siun              #+#    #+#             */
-/*   Updated: 2023/12/20 17:47:53 by siun             ###   ########.fr       */
+/*   Updated: 2024/01/05 16:42:10 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ void	re_type_l_pipes(int filefd, int pipe_in)
 {	
 	int	fd_tmp;
 
-	fd_tmp = dup2(filefd, pipe_in);//
+	if (pipe_in != -1)
+		fd_tmp = dup2(filefd, pipe_in);//
+	else
+		fd_tmp = dup2(filefd, 0);
 	if (fd_tmp == -1)
 	{
 		close(filefd);
