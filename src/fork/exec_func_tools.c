@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_func_tools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:05:19 by subpark           #+#    #+#             */
-/*   Updated: 2023/12/15 15:15:11 by siun             ###   ########.fr       */
+/*   Updated: 2024/01/05 17:27:56 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ char	*path_pointer(char **envp, char *command)
 	i = 0;
 	while (envp[i] != NULL)
 	{
-		path = command_path(envp, i, command);
+		if (command[0] != '/')
+			path = command_path(envp, i, command);
+		else
+			path = ft_strdup(command);
 		if (access(path, F_OK) == 0 && access(path, X_OK) == 0)
 			return (path);
 		free(path);
