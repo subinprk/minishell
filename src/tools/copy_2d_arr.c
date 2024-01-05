@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:32:20 by siun              #+#    #+#             */
-/*   Updated: 2023/12/05 16:38:30 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/05 15:48:34 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	**cpy_full_2d_array(char **origin)
 			exit(errno);
 		i ++;
 	}
+	free_2d(origin);
 	array[origin_length] = NULL;
 	return (array);
 }
@@ -53,6 +54,7 @@ char	**append_2d_array(char **origin, char *line)
 	}
 	origin[array_length] = ft_strdup(line);
 	origin[array_length + 1] = NULL;
+	free_2d(tmp);
 	return (origin);
 }
 
