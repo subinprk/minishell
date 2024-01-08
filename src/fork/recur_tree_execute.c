@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/08 13:08:40 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/08 16:51:08 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,10 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp)
 		close(old_pipe[0]);
 		close(old_pipe[1]);
 	}
-	waitpid(pid, NULL, WUNTRACED);//might be in main function before generating prompt
+	waitpid(pid, NULL, WUNTRACED);
 	write_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
 	free_stdios(*stdios);
 	*stdios = NULL;
-	if (cmd->pipe_exist == -1)
-	{
-		close(new_pipe[0]);
-		close(new_pipe[1]);
-		pipefd[0] = -1;
-		pipefd[1] = -1;
-	}
 }
 
 void	execute_simple_redirect(t_cmd *node, t_stdio **stdios)
