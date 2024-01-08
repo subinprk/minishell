@@ -6,13 +6,13 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/05 13:36:59 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/08 12:22:37 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	execute_simple_cmd(t_cmd *cmd, t_stdio *stdios, char **envp)
+void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp)
 {
 	static int		pipefd[2] = {-1, -1};
 	static int		new_pipe[2];
@@ -35,7 +35,7 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio *stdios, char **envp)
 	else if (pid == 0)
 	{
 		update_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
-		update_redirfd(pipefd, stdios);
+		update_redirfd(pipefd, *stdios);
 		builtin = check_builtin(cmd->left_child);
 		if (builtin)
 		{
@@ -60,8 +60,8 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio *stdios, char **envp)
 	// }
 	waitpid(pid, NULL, WUNTRACED);//might be in main function before generating prompt
 	write_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
-	free_stdios(stdios);
-	stdios = NULL;
+	free_stdios(*stdios);
+	*stdios = NULL;
 }
 
 void	execute_simple_redirect(t_cmd *node, t_stdio **stdios)
@@ -96,7 +96,7 @@ void	execute_tree(t_cmd *node, t_stdio **stdios, char **envp)
 	else if (node->node_type == NODE_PIPE)
 		;
 	else if (node->node_type == NODE_SIMPLE_CMD)
-		execute_simple_cmd(node, *stdios, envp);
+		execute_simple_cmd(node, stdios, envp);
 	else if (node->node_type == NODE_SIMPLE_REDIRECT)
 		execute_simple_redirect(node, stdios);
 }
