@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:54:07 by siun              #+#    #+#             */
-/*   Updated: 2024/01/05 16:42:10 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/08 17:34:03 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ void	re_type_l_pipes(int filefd, int pipe_in)
 {	
 	int	fd_tmp;
 
-	if (pipe_in != -1)
-		fd_tmp = dup2(filefd, pipe_in);//
-	else
-		fd_tmp = dup2(filefd, 0);
+	fd_tmp = dup2(filefd, 0);
 	if (fd_tmp == -1)
 	{
 		close(filefd);
