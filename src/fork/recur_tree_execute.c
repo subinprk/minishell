@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/08 16:51:08 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/08 16:56:46 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,8 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp)
 			exec(cmd->right_child->cmdstr, envp);
 		}
 	}
-	if (pipefd[0] != -1)
-	{
-		close(old_pipe[0]);
-		close(old_pipe[1]);
-	}
-	waitpid(pid, NULL, WUNTRACED);
 	write_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
+	waitpid(pid, NULL, WUNTRACED);
 	free_stdios(*stdios);
 	*stdios = NULL;
 }
