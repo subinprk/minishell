@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/08 17:16:02 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:55:58 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,13 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp)
 	static int		pipefd[2] = {-1, -1};
 	static int		new_pipe[2];
 	int				old_pipe[2];
-	int				builtin;
+	int				g_exit_status;
 	pid_t			pid;
 
 	if (pipefd[0] != -1) //for excepting the case of first time
 	{
 		old_pipe[0] = dup(new_pipe[0]);
-		old_pipe[1] = dup(new_pipe[1]);
 		close(new_pipe[0]);
-		close(new_pipe[1]);
 	}
 	if (pipe(new_pipe) == -1)
 		return (perror("Pipe: "));//exit with signals
@@ -36,10 +34,11 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp)
 	{
 		update_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
 		update_redirfd(pipefd, *stdios);
-		builtin = check_builtin(cmd->left_child);
-		if (builtin)
+		if (check_builtin(cmd->left_child))
 		{
 			builtin_action(cmd->right_child, cmd->right_child->cmdstr);
+			//if builtin action return 0 meanin successful, if that case, g_exit status become 0
+			//so have to modificate builtin action function to return int.
 			exit(errno);
 		}
 		else
@@ -48,10 +47,13 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp)
 			exec(cmd->right_child->cmdstr, envp);
 		}
 	}
-	write_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
-	waitpid(pid, NULL, WUNTRACED);
-	free_stdios(*stdios);
-	*stdios = NULL;
+	else
+	{
+		write_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
+		waitpid(-1, &g_exit_status, 0);
+		free_stdios(*stdios);
+		*stdios = NULL;
+	}
 }
 
 void	execute_simple_redirect(t_cmd *node, t_stdio **stdios)

@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:05:19 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/05 17:27:56 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/09 15:27:44 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	exec(char **cmd, char **env)
 	path = path_pointer(env, cmd[0]);
 	if (!path)
 		exit(2);
-	execve(path, cmd, env);
+	g_exit_status = execve(path, cmd, env);
 	if (path)
 		free(path);
 	exit (errno);
