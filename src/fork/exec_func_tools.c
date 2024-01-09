@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:05:19 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/09 15:27:44 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/09 16:46:39 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char	*path_pointer(char **envp, char *command)
 void	exec(char **cmd, char **env)
 {
 	char	*path;
+	int		g_exit_status;
 
 	if (!cmd || !cmd[0])
 		exit(0);
@@ -55,7 +56,9 @@ void	exec(char **cmd, char **env)
 	g_exit_status = execve(path, cmd, env);
 	if (path)
 		free(path);
-	exit (errno);
+	g_exit_status = errno;
+	if (g_exit_status)
+		exit (errno);
 }
 
 int	redirect_type(t_cmd *node)

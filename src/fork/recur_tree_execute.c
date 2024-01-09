@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/09 15:55:58 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/09 17:10:28 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp)
 	static int		pipefd[2] = {-1, -1};
 	static int		new_pipe[2];
 	int				old_pipe[2];
-	int				g_exit_status;
 	pid_t			pid;
 
 	if (pipefd[0] != -1) //for excepting the case of first time
@@ -50,7 +49,7 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp)
 	else
 	{
 		write_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
-		waitpid(-1, &g_exit_status, 0);
+		waitpid(-1, &g_exit_status, WNOHANG);
 		free_stdios(*stdios);
 		*stdios = NULL;
 	}

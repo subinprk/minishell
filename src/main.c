@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:48:01 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/09 15:58:32 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/09 17:13:34 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ void	interactive_mode(t_cmd **tree, char **envp)
 			exit(0);//have to add some exiting things
 		*tree = extract_command(tmp);
 		search_tree(*tree, envp);
+		printf("exit status %d\n", g_exit_status);
+		write(1,"\0",1);
+		waitpid(-1, &g_exit_status, WUNTRACED);//have to wait multiple times according to the number of commands.
+		// waitpid(-1, &g_exit_status, WUNTRACED);
+		// waitpid(-1, &g_exit_status, WUNTRACED);
 		free_tree(*tree);
 		free(tmp);
 	}
