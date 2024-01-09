@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 03:40:29 by siun              #+#    #+#             */
-/*   Updated: 2024/01/05 16:59:09 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/09 19:43:16 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int	syntax_pipe(char **cmd_line, int *token, int *i, t_cmd **node)
 		i[1] = pipe_index;
 		if (pipe_index == i[0])
 		{
-			perror("syntax error near unexpected token '|'\n");
+			write(2, "syntax error near unexpected token '|'\n",
+			ft_strlen("syntax error near unexpected token '|'\n"));
+			g_exit_status = 1;
 			return (-1);
 		}
 	}

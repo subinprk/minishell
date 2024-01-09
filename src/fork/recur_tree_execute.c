@@ -6,11 +6,22 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/09 17:10:28 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/09 19:40:38 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	red_error_handle(t_cmd *type)
+{
+	if (type->cmdstr[0][0] == '<' || type->cmdstr[0][0] =='>')
+	{
+		g_exit_status = 0;
+		exit (g_exit_status);
+	}
+	else
+		return ;
+}
 
 void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp)
 {
@@ -42,6 +53,7 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp)
 		}
 		else
 		{
+			red_error_handle(cmd->left_child);
 	 		print_error_cmd(cmd->left_child, envp);
 			exec(cmd->right_child->cmdstr, envp);
 		}
