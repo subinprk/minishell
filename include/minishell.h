@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:52:41 by irivero-          #+#    #+#             */
-/*   Updated: 2024/01/05 16:58:48 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/09 17:51:27 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ t_stdio	*find_last_out(t_stdio *stdios);
 void	connect_last_out(int pipe_out, t_stdio *last_out);
 void	connect_last_in(int pipe_in, t_stdio *last_in);
 void	write_pipefd(int (*pipefd)[2], int pipe_exist, int old_pipe[2], int new_pipe[2]);
+void		wait_each_commands(t_cmd *tree);
 
 //parsing
 char	**chopping_str(char *str);
