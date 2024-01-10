@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:34:26 by subpark           #+#    #+#             */
-/*   Updated: 2023/12/11 17:56:35 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/05 15:46:08 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ void	free_tree(t_cmd	*tree)
 		return ;
 	else
 	{
-		free_tree(tree->left_child);
-		free_tree(tree->right_child);
+		if (tree->left_child != NULL)
+			free_tree(tree->left_child);
+		if (tree->right_child != NULL)
+			free_tree(tree->right_child);
 		if (tree->cmdstr)
 			free_2d(tree->cmdstr);
 		free(tree);

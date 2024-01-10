@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_analysis.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 03:40:29 by siun              #+#    #+#             */
-/*   Updated: 2023/12/15 14:50:55 by siun             ###   ########.fr       */
+/*   Updated: 2024/01/09 19:43:16 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int	syntax_pipe(char **cmd_line, int *token, int *i, t_cmd **node)
 		i[1] = pipe_index;
 		if (pipe_index == i[0])
 		{
-			perror("syntax error near unexpected token '|'\n");
+			write(2, "syntax error near unexpected token '|'\n",
+			ft_strlen("syntax error near unexpected token '|'\n"));
+			g_exit_status = 1;
 			return (-1);
 		}
 	}
@@ -90,7 +92,7 @@ int	syntax_redirects(char **cmd_line, int *token, int *i, t_cmd **node)
 	next_redirect_index = find_next_redirection(token, i);
 	if (next_redirect_index != -1)
 		i[1] = next_redirect_index - 1;
-	if (syntax_simple_redirect(cmd_line, i, &((*node)->left_child)) == -1)
+	if (syntax_simple_redirect(cmd_line, /*token,*/ i, &((*node)->left_child)) == -1)
 		return (-1);
 	if (next_redirect_index != -1)
 	{

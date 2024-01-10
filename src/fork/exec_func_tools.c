@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_func_tools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:05:19 by subpark           #+#    #+#             */
-/*   Updated: 2023/12/15 15:15:11 by siun             ###   ########.fr       */
+/*   Updated: 2024/01/09 16:46:39 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ char	*path_pointer(char **envp, char *command)
 	i = 0;
 	while (envp[i] != NULL)
 	{
-		path = command_path(envp, i, command);
+		if (command[0] != '/')
+			path = command_path(envp, i, command);
+		else
+			path = ft_strdup(command);
 		if (access(path, F_OK) == 0 && access(path, X_OK) == 0)
 			return (path);
 		free(path);
@@ -43,16 +46,19 @@ char	*path_pointer(char **envp, char *command)
 void	exec(char **cmd, char **env)
 {
 	char	*path;
+	int		g_exit_status;
 
 	if (!cmd || !cmd[0])
 		exit(0);
 	path = path_pointer(env, cmd[0]);
 	if (!path)
 		exit(2);
-	execve(path, cmd, env);
+	g_exit_status = execve(path, cmd, env);
 	if (path)
 		free(path);
-	exit (errno);
+	g_exit_status = errno;
+	if (g_exit_status)
+		exit (errno);
 }
 
 int	redirect_type(t_cmd *node)

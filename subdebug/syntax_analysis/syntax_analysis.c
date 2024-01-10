@@ -15,7 +15,8 @@ void	syntax_pipe(char **cmd_line, int *token, int *i, t_cmd *node)
 		i[1] = pipe_index - 1;
 		if (i[1] == i[0])
 		{
-			perror("syntax error near unexpected token '|'\n");
+			write(2, "syntax error near unexpected token '|'\n",
+			ft_strlen("syntax error near unexpected token '|'\n"));
 			return ;
 		}
 	}

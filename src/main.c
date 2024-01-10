@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:48:01 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/03 16:33:10 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/09 17:52:23 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ void	interactive_mode(t_cmd **tree, char **envp)
 		}
 		*tree = extract_command(tmp);
 		search_tree(*tree, envp);
-//		waitpid(0, NULL, WNOHANG);
+		printf("exit status %d\n", g_exit_status);
+		write(1,"\0",1);
+		wait_each_commands(*tree);
 		free_tree(*tree);
 		free(tmp);
 	}
