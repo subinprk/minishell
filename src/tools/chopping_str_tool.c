@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:02:21 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/10 18:40:24 by subpark          ###   ########.fr       */
+/*   Updated: 2023/12/07 17:06:18 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ void	find_rellocator(char *str, int *i, int *count)
 		(*count) ++;
 	}
 }
+
+/*void	find_spaces(char *str, int *i, int *count)
+{
+	if (str[*i] == ' ')
+	while (str[*i] == ' ')
+		(*i) ++;
+	(*count) ++;
+}*/
 
 char	*strdup_rellocator(char *str, int *i)
 {
