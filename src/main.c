@@ -31,11 +31,7 @@ void	interactive_mode(t_cmd **tree, char **envp)
 		tmp = readline(" ");
 		add_history(tmp);
 		if (!tmp)
-		{
-			fprintf(stderr, "is here boss\n");
-			write_history("history.txt");
 			exit(0);//have to add some exiting things
-		}
 		*tree = extract_command(tmp);
 		search_tree(*tree, envp);
 		printf("exit status %d\n", g_exit_status);
