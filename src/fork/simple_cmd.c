@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:07:25 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/09 15:06:16 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/10 14:16:43 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	write_pipefd(int (*pipefd)[2], int pipe_exist, int old_pipe[2], int new_pip
 	{
 		(*pipefd)[0] = old_pipe[0];
 		close(old_pipe[0]);
-		close(old_pipe[1]);
 	}
 	if (pipe_exist == -1) // if there is no further pipe
 	{
@@ -39,10 +38,7 @@ void	update_pipefd(int (*pipefd)[2], int pipe_exist, int old_pipe[2], int new_pi
 	if ((*pipefd)[0] == -1) //if there is no previous pipe
 		(*pipefd)[0] = 0;
 	else
-	{
 		(*pipefd)[0] = dup2(old_pipe[0], 0);
-		close(old_pipe[1]);
-	}
 	if (pipe_exist == -1) //if there is no further pipe
 		close(new_pipe[1]);
 	else
