@@ -12,9 +12,9 @@
 
 #include "../include/minishell.h"
 
-void	print_prompt()
+void	print_prompt(void)
 {
-	char cwd[1024];
+	char	cwd[1024];
 
 	getcwd(cwd, sizeof(cwd));
 	printf("%s", cwd);
@@ -29,8 +29,13 @@ void	interactive_mode(t_cmd **tree, char **envp)
 		set_signals_interactive();
 		print_prompt();
 		tmp = readline(" ");
+		add_history(tmp);
 		if (!tmp)
+		{
+			fprintf(stderr, "is here boss\n");
+			write_history("history.txt");
 			exit(0);//have to add some exiting things
+		}
 		*tree = extract_command(tmp);
 		search_tree(*tree, envp);
 //		waitpid(0, NULL, WNOHANG);
