@@ -13,12 +13,12 @@
 #include "../../include/minishell.h"
 
 /*prints the global exit status to the standard output*/
-void	exit_status(void)
+/* void	exit_status(void)
 {
 	ft_putstr_fd(ft_itoa(g_exit_status), 1);
 }
 
-/*handles echoing env variables based on cmdline arg*/
+// handles echoing env variables based on cmdline arg
 void	echo_env_variable(char **cmdline, char **envs, int i)
 {
 	char	*value;
@@ -35,7 +35,7 @@ void	echo_env_variable(char **cmdline, char **envs, int i)
 	}
 }
 
-/* checks if a cmdline arg is the "-n" option*/
+// checks if a cmdline arg is the "-n" option
 int	is_option_n(char *token)
 {
 	int i;
@@ -55,7 +55,7 @@ int	is_option_n(char *token)
 	return (1);
 }
 
-/*simulates the behavior of the echo command*/
+// simulates the behavior of the echo command
 void	our_echo(char **cmdline, char **envs)
 {
 	int i;
@@ -88,4 +88,111 @@ void	our_echo(char **cmdline, char **envs)
 	//print a new line if the "-n" option was not used
 	if (ret != -1)
 		ft_putchar_fd('\n', 1);
+} */
+
+int	f_strcmp(char *s1, char *s2)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (s1[i] != '\0' && s2[i] != '\0')
+	{
+		if (s1[i] != s2[i])
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
+int	f_putstr(char *s)
+{
+	write(1, s, ft_strlen(s));
+	return (0);
+}
+
+int	f_strchr(char *s, char c)
+{
+	int	i = 0;
+	while (s[i] != c && s[i] != '\0')
+		i++;
+	if (s[i] == '\0')
+		return (-1);
+	return (i);
+}
+
+char	*var_name(char *s)
+{
+	int	i = 0;
+	int	q;
+	char	*tmp;
+
+	q = f_strchr(s, '\'');
+	tmp = malloc((q + 1) * sizeof(char));
+	while (s[i] && s[i] != '\'')
+	{
+		tmp[i] = s[i];
+		i++;
+	}
+	tmp[i] = '\0';
+	return (tmp + 1);
+}
+
+int	dollar_sign(char *s)
+{
+	int	k = 0;
+	char	*var, *varr;
+	while (s[k] != '\'' && s[k] != '\0' && s[k] != '$')
+	{
+		write(1, &s[k], 1);
+		k++;
+	}
+	if (s[k] == '\'')
+	{
+		while (s[++k] != '\0' && s[k] != '$')
+			write(1, &s[k], 1);
+		if (s[k] == '$')
+		{
+			var = var_name(s + k);
+			varr = getenv(var);
+			f_putstr(varr);
+			s = s + k + f_strlen(var) + 2;
+		}
+		f_putstr(s);
+	}
+	else if (s[k] == '$')
+	{
+		var = var_name(s + k);
+		varr = getenv(var);
+		f_putstr(varr);
+	}
+	return 0;
+}
+
+void	our_echo(char **av)
+{
+	int	i;
+	int	d;
+	char	c;
+
+	c = 'y';
+	i = 1;
+	if (f_strcmp("-n", av[1]) == 0)
+	{
+		i = 2;
+		c = 'n';
+	}
+	while (av[i] != NULL)
+	{
+		d = f_strchr(av[i], '$');
+		if (d != -1)
+			dollar_sign(av[i]);
+		else
+			f_putstr(av[i]);
+		if (av[i + 1] != NULL)
+			write(1, " ", 1);
+		if (av[i + 1] == NULL && c == 'y')
+			write(1, "\n", 1);
+		i++;
+	}
+	return ;
 }

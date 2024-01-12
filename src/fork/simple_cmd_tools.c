@@ -40,20 +40,20 @@ int	check_builtin(t_cmd *file_path)
 		return (0);
 }
 
-void	builtin_action(t_cmd *builtin, char **cmdline)
+void	builtin_action(t_cmd *builtin, char **cmdline, t_envp *env)
 {
 	if (!ft_strcmp(builtin->cmdstr[0], "echo"))
-		our_echo(&cmdline[1], g_envp);
-	else if (!ft_strcmp(builtin->cmdstr[0], "cd"))
-		change_directory(cmdline, g_envp);
+		our_echo(cmdline);
+	//else if (!ft_strcmp(builtin->cmdstr[0], "cd"))
+	//	change_directory(cmdline, g_envp);
 	else if (!ft_strcmp(builtin->cmdstr[0], "pwd"))
-		our_pwd();
-	else if (!ft_strcmp(builtin->cmdstr[0], "export"))
-		execute_export_command(builtin, cmdline);
-	else if (!ft_strcmp(builtin->cmdstr[0], "unset"))
-		execute_unset_command(builtin, cmdline);
+		our_pwd(builtin->cmdstr);
+	//else if (!ft_strcmp(builtin->cmdstr[0], "export"))
+	//	export(builtin->cmdstr + 1, env);
+	//else if (!ft_strcmp(builtin->cmdstr[0], "unset"))
+	//	ft_unset(cmdline, env);
 	else if (!ft_strcmp(builtin->cmdstr[0], "env"))
-		ft_env(g_envp);
+		ft_env(env);
 	else if (!ft_strcmp(builtin->cmdstr[0], "exit"))
-		exit_command(builtin, cmdline);
+		exit_command();
 }

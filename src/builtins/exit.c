@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void    exit_err(void)
+/* void    exit_err(void)
 {
 	ft_putstr_fd("exit\n", 1);
 	exit(g_exit_status);
@@ -46,4 +46,9 @@ void    exit_command(t_cmd *cmd, char **cmdline)
 		exit(g_exit_status & 255);
 	}
 	exit_err();
+} */
+
+void	exit_command(void)
+{
+	exit(g_exit_status);
 }

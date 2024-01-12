@@ -69,6 +69,12 @@ typedef struct s_stdio
 	struct s_stdio	*next_stdio;
 }	t_stdio;
 
+typedef struct s_envp
+{
+	int	k;
+	char	**envp;
+}	t_envp;
+
 extern char	**g_envp;
 extern int	g_exit_status;
 
@@ -78,36 +84,37 @@ extern int	g_exit_status;
 int		cd_to_home_directory(char *current_path, char **cmdline, char **envs);
 int		cd_to_env_variable(char *current_path, char **cmdline, char **envs);
 void	update_pwd_variables(char **envs);
-void	change_directory(char **cmdline, char **envs);
+void	change_directory(char **paths);
 
 //echo
 void	exit_status(void);
 void	echo_env_variable(char **cmdline, char **envs, int i);
 int		is_option_n(char *token);
-void	our_echo(char **cmdline, char **envs);
-
+void	our_echo(char **av);
 //env
-void    ft_env(char **args);
+void    ft_env(t_envp *args);
+int	f_strlen(char *s);
 
 //exit
 void    exit_err(void);
-void    exit_command(t_cmd *cmd, char **cmdline);
+void	exit_command(void);
+//void    exit_command(t_cmd *cmd, char **cmdline);
 
 //export
 void    print_export(char **env);
 int     is_valid_export_key(char *key);
 void	add_export_variable(char *str, char **new, int i);
 int		update_or_add_export(char *str, char ***env);
-void    execute_export_command(t_cmd *cmd, char **cmdline);
+void    export(char **builtin, t_envp *env);
 
 //pwd
-void    our_pwd(void);
+void    our_pwd(char **av);
 
 //unset
 int 	is_valid_env_variable_name (char *str);
 int		check_env_variable(char *key, char *env);
 int 	unset_enviroment_variable(char *key, char ***env);
-void    execute_unset_command(t_cmd *cmd, char **cmdline);
+void    ft_unset(char **cmdline, t_envp *env);
 
 //tools
 void	free_2d(char **arr);
@@ -131,21 +138,19 @@ int		how_many_token_id(int *token, int token_identifier);
 int		token_length(int *token);
 void	free_tree(t_cmd	*tree);
 
-
 int		ft_strcmp(char *s1, char *s2);
-
 
 //forks
 int		redirect_type(t_cmd *node);
 char	*command_path(char **path_array, int i, char *command);
 char	*path_pointer(char **envp, char *command);
 void	exec(char **cmd, char **env);
-void	search_tree(t_cmd *node, char **envp);
+void	search_tree(t_cmd *node, char **envp, t_envp *env);
 void	pipe_stdins(int *pipefd, t_stdio *stdios);
 void	pipe_stdouts(int *pipefd, t_stdio *stdios);
 void	print_error_cmd(t_cmd *file_path, char **envp);
 int		check_builtin(t_cmd *file_path);
-void	builtin_action(t_cmd *builtin, char **cmdline);
+void	builtin_action(t_cmd *builtin, char **cmdline, t_envp *env);
 void	update_pipefd(int (*pipefd)[2], int pipe_exist, int old_pipe[2], int new_pipe[2]);
 void	update_redirfd(int *pipefd, t_stdio *stdios);
 t_stdio	*find_last_in(t_stdio *stdios);
