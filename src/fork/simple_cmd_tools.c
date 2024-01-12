@@ -44,16 +44,8 @@ void	builtin_action(t_cmd *builtin, char **cmdline, t_envp *env)
 {
 	if (!ft_strcmp(builtin->cmdstr[0], "echo"))
 		our_echo(cmdline);
-	//else if (!ft_strcmp(builtin->cmdstr[0], "cd"))
-	//	change_directory(cmdline, g_envp);
 	else if (!ft_strcmp(builtin->cmdstr[0], "pwd"))
 		our_pwd(builtin->cmdstr);
-	//else if (!ft_strcmp(builtin->cmdstr[0], "export"))
-	//	export(builtin->cmdstr + 1, env);
-	//else if (!ft_strcmp(builtin->cmdstr[0], "unset"))
-	//	ft_unset(cmdline, env);
 	else if (!ft_strcmp(builtin->cmdstr[0], "env"))
 		ft_env(env);
-	else if (!ft_strcmp(builtin->cmdstr[0], "exit"))
-		exit_command();
 }

@@ -60,11 +60,13 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp, t_envp *env)
 	}
 	else
 	{
-		if (!ft_strcmp(cmd->right_child->cmdstr[0], "unset"))
+		if (!ft_strcmp(cmd->right_child->cmdstr[0], "exit"))
+			exit_command();
+		else if (!ft_strcmp(cmd->right_child->cmdstr[0], "unset"))
 			ft_unset(cmd->right_child->cmdstr, env);
-		if (!ft_strcmp(cmd->right_child->cmdstr[0], "export"))
+		else if (!ft_strcmp(cmd->right_child->cmdstr[0], "export"))
 			export(cmd->right_child->cmdstr + 1, env);
-		if (!ft_strcmp(cmd->right_child->cmdstr[0], "cd"))
+		else if (!ft_strcmp(cmd->right_child->cmdstr[0], "cd"))
 			change_directory(cmd->right_child->cmdstr);
 		write_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
 		waitpid(-1, &g_exit_status, WNOHANG);
