@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 15:48:47 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/10 19:29:26 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/12 15:41:30 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,5 @@ void	set_signals_interactive(void)
 	act.sa_handler = &signal_reset_prompt;
 	sigaction(SIGINT, &act, NULL);
 }
+
+// void	hered

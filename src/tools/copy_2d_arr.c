@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:32:20 by siun              #+#    #+#             */
-/*   Updated: 2024/01/05 15:48:34 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/12 16:15:27 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	**cpy_full_2d_array(char **origin)
 	int		origin_length;
 	char	**array;
 
+	if (origin == NULL)
+		return (NULL);
 	array = NULL;
 	origin_length = array_length_2d(origin);
 	array = (char **)malloc(sizeof(char *) * ((origin_length) + 1));
@@ -44,7 +46,8 @@ char	**append_2d_array(char **origin, char *line)
 
 	array_length = array_length_2d(origin);
 	tmp = cpy_full_2d_array(origin);
-	free_2d(origin);
+	if (origin != NULL)
+		free_2d(origin);
 	origin = (char **)malloc(sizeof(char *) * (array_length + 2));
 	i = 0;
 	while (i < array_length)
@@ -53,8 +56,11 @@ char	**append_2d_array(char **origin, char *line)
 		i ++;
 	}
 	origin[array_length] = ft_strdup(line);
+	printf("copied origin: %s\n", origin[array_length]);
+	printf("array length: %d\n", array_length);
+	if (tmp != NULL)
+		free_2d(tmp);
 	origin[array_length + 1] = NULL;
-	free_2d(tmp);
 	return (origin);
 }
 
@@ -76,4 +82,16 @@ char	**text_array_part_cpy(char **line, int start, int end)
 	}
 	part[i] = NULL;
 	return (part);
+}
+
+void	write_every_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i] != NULL)
+	{
+		printf("%s", array[i]);
+		i ++;
+	}
 }

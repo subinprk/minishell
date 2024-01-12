@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/10 13:13:01 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/12 15:01:40 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp)
 		return (perror("Fork: "));
 	else if (pid == 0)
 	{
-		update_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
 		update_redirfd(pipefd, *stdios);
+		update_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
 		if (check_builtin(cmd->left_child))
 		{
 			builtin_action(cmd->right_child, cmd->right_child->cmdstr);

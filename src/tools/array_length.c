@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 03:22:53 by siun              #+#    #+#             */
-/*   Updated: 2023/12/05 16:28:31 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/12 15:43:56 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	array_length_2d(char **array)
 	int	i;
 
 	i = 0;
+	if (array == NULL)
+		return (0);
 	while (array[i] != NULL)
 		i ++;
 	return (i);

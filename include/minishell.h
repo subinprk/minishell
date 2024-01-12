@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:52:41 by irivero-          #+#    #+#             */
-/*   Updated: 2024/01/09 17:51:27 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/12 15:46:59 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ char	**text_array_part_cpy(char **line, int start, int end);
 int		how_many_token_id(int *token, int token_identifier);
 int		token_length(int *token);
 void	free_tree(t_cmd	*tree);
+void	write_every_array(char **array);
 
 
 int		ft_strcmp(char *s1, char *s2);
