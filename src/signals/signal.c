@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 15:48:47 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/12 15:41:30 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/12 16:31:49 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ void	ignore_sigquit(void)
 	ft_bzero(&act, sizeof(act));
 	act.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &act, NULL);
+}
+
+void	signal_print_newline(int signal)
+{
+	(void)signal;
+	rl_on_new_line();
+	//have to be discussed
 }
 
 void	signal_reset_prompt(int signal)

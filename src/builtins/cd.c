@@ -13,7 +13,7 @@
 #include "../../include/minishell.h"
 
 //changes the current working directory to the user's home directory
-int	cd_to_home_directory(char *current_path, char **cmdline, char **envs)
+/* int	cd_to_home_directory(char *current_path, char **cmdline, char **envs)
 {
 	//check if the argument is "~", print an error and set the exit status
 	if (cmdline[1][1] == '~')
@@ -88,4 +88,18 @@ void	change_directory(char **cmdline, char **envs)
 		g_exit_status = 1;
 	else
 		g_exit_status = 0;
+}
+ */
+
+void	change_directory(char **paths)
+{
+	char	*path = paths[1];
+
+	if (!path)
+		path = getenv("HOME");
+        if (chdir(path) == -1)
+        {
+        	printf("cd: no such file or directory: %s", path);
+        	return ;
+        }
 }

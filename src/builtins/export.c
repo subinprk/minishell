@@ -14,7 +14,7 @@
 
 /*prints the contents of the env array to the standard output, each element
 on a new line*/
-void    print_export(char **env)
+/* void    print_export(char **env)
 {
     int i;
 
@@ -26,7 +26,7 @@ void    print_export(char **env)
     }
 }
 
-/*checks if a given key(part of an enviromental variable) is valid*/
+// checks if a given key(part of an enviromental variable) is valid
 int     is_valid_export_key(char *key)
 {
     int i;
@@ -40,15 +40,15 @@ int     is_valid_export_key(char *key)
     return (0);
 }
 
-/*adds a new env variable str to the new array*/
+// adds a new env variable str to the new array
 void	add_export_variable(char *str, char **new, int i)
 {
 	new[i] = ft_strdup(str);
 	new[i + 1] = NULL;
 }
 
-/* checks if tje enviromental variable str exists in the env array. If
-it exists, updates the value, if not, adds a new variable.*/
+// checks if tje enviromental variable str exists in the env array. If
+// it exists, updates the value, if not, adds a new variable.
 int	update_or_add_export(char *str, char ***env)
 {
 	int i;
@@ -75,7 +75,7 @@ int	update_or_add_export(char *str, char ***env)
 	return (0);	
 }
 
-/*THe function implement the export command*/
+// THe function implement the export command
 void    execute_export_command(t_cmd *cmd, char **cmdline)
 {
     char    **temp;
@@ -105,4 +105,40 @@ void    execute_export_command(t_cmd *cmd, char **cmdline)
     }
     if (ret != 0)
         g_exit_status = 1;
+} */
+
+//char	**export(char *v_name, char *v_value, char **env)
+void	export(char **builtin, t_envp *env)
+{
+	int	i;
+	int	k;
+	int	m;
+	char	*v_name;
+	char	*v_value;
+
+	i = 0;
+	k = -1;
+	m = 0;
+
+	v_name = builtin[0];
+	v_value = builtin[2];
+	if (env)
+	while (env->envp[i] != NULL)
+		i++;
+	env->envp[i] = malloc(f_strlen(v_name) + f_strlen(v_value) + 2);
+	while (v_name[++k] != '\0')
+		env->envp[i][k] = v_name[k];
+	env->envp[i][k] = '=';
+	k++;
+	while (v_value[m] != '\0')
+	{
+		env->envp[i][k] = v_value[m];
+		k++;
+		m++;
+	}
+	env->envp[i][k] = '\0';
+	i++;
+	env->envp[i] = NULL;
+	env->k = 4;
+	return ;
 }
