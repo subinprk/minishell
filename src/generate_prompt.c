@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   generate_prompt.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 16:30:36 by irivero-          #+#    #+#             */
-/*   Updated: 2023/12/12 21:59:34 by siun             ###   ########.fr       */
+/*   Updated: 2024/01/12 17:46:18 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,19 @@ void	generate_prompt(void)
 /* reads a line from standard input and appends it to the content of line
 it uses a loop to keep reading util the end of input.
 it returns the value of ret.*/
-void		get_line(char **line)
-{
-	//int		ret;
-	char	*buf;
-	//char	*prompt;
-	char	**tmp;
+// void		get_line(char **line)
+// {
+// 	//int		ret;
+// 	char	*buf;
+// 	//char	*prompt;
+// 	char	**tmp;
 
-	generate_prompt();
-	buf = readline("");
-	tmp = cpy_full_2d_array(line);
-	line = append_2d_array(line, *tmp);
-	free_2d(tmp);
-	free(buf);
+// 	generate_prompt();
+// 	buf = readline("");
+// 	tmp = cpy_full_2d_array(line);
+// 	line = append_2d_array(line, *tmp);
+// 	free_2d(tmp);
+// 	free(buf);
 	/**line = ft_strdup("");
 	while (1)
 	{
@@ -74,7 +74,7 @@ void		get_line(char **line)
 		break ;
 	}
 	return (ret);*/
-}
+// }
 
 /* reads from standard input into the buffer*/
 int		read_from_stdin(char **buf)

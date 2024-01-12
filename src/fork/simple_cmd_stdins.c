@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:54:07 by siun              #+#    #+#             */
-/*   Updated: 2024/01/12 16:31:32 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/12 18:07:11 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	heredoc_input(/*int filefd, */char *word)
 	int		i;
 
 	i = 0;
-	text = NULL;
+	text = (char **)malloc(sizeof(char *));
+	text[0] = NULL;
 	line = readline("heredoc> ");
 	if (!line)
 		exit(1);
