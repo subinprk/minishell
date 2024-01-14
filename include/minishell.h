@@ -91,6 +91,10 @@ void	exit_status(void);
 void	echo_env_variable(char **cmdline, char **envs, int i);
 int		is_option_n(char *token);
 void	our_echo(char **av);
+int	f_strchr(char *s, char c);
+int	f_strcmp(char *s1, char *s2);
+
+
 //env
 void    ft_env(t_envp *args);
 int	f_strlen(char *s);
@@ -163,7 +167,7 @@ void	wait_each_commands(t_cmd *tree);
 
 //parsing
 char	**chopping_str(char *str);
-t_cmd	*extract_command(char *str);
+t_cmd	*extract_command(char *str, t_envp *env);
 int		*token_data(char **chopped_str);
 int		syntax_pipe(char **cmd_line, int *token, int *i, t_cmd **node);
 int		syntax_cmds(char **cmd_line, int *token, int *i, t_cmd **node);
@@ -206,6 +210,6 @@ void	set_signals_interactive(void);
 void	print_prompt();
 
 // ch_complete.c (FERDAWS)
-char	**input_validation(char *tmp);
+char	**input_validation(char *tmp, char **env);
 
 #endif

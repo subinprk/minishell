@@ -14,7 +14,7 @@
 
 #include "../../include/minishell.h"
 
-t_cmd	*extract_command(char *str)
+t_cmd	*extract_command(char *str, t_envp *env)
 {
 	t_cmd	*cmd_tree;
 	char	**chopped_str;
@@ -25,7 +25,7 @@ t_cmd	*extract_command(char *str)
 	if (str == NULL || str[0] == 0)
 		return (NULL);
 	cmd_tree = NULL;
-	chopped_str = input_validation(str);
+	chopped_str = input_validation(str, env->envp);
 	replace_exit_status(&chopped_str);
 	if (!chopped_str)
 		return (NULL);

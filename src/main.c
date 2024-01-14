@@ -32,7 +32,7 @@ void	interactive_mode(t_cmd **tree, char **envp, t_envp *env)
 		add_history(tmp);
 		if (!tmp)
 			exit(0);//have to add some exiting things
-		*tree = extract_command(tmp);
+		*tree = extract_command(tmp, env);
 		search_tree(*tree, envp, env);
 		printf("exit status %d\n", g_exit_status);
 		write(1,"\0",1);
@@ -53,7 +53,7 @@ void	non_interactive_mode(t_cmd **tree, char *input, char **envp, t_envp *env)
 	i = 0;
 	while (user_inputs[i])
 	{
-		*tree = extract_command(user_inputs[i]);
+		*tree = extract_command(user_inputs[i], env);
 		search_tree(*tree, envp, env);
 		i ++;
 		free_tree(*tree);

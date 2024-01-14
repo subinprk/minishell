@@ -120,58 +120,9 @@ int	f_strchr(char *s, char c)
 	return (i);
 }
 
-char	*var_name(char *s)
-{
-	int	i = 0;
-	int	q;
-	char	*tmp;
-
-	q = f_strchr(s, '\'');
-	tmp = malloc((q + 1) * sizeof(char));
-	while (s[i] && s[i] != '\'')
-	{
-		tmp[i] = s[i];
-		i++;
-	}
-	tmp[i] = '\0';
-	return (tmp + 1);
-}
-
-int	dollar_sign(char *s)
-{
-	int	k = 0;
-	char	*var, *varr;
-	while (s[k] != '\'' && s[k] != '\0' && s[k] != '$')
-	{
-		write(1, &s[k], 1);
-		k++;
-	}
-	if (s[k] == '\'')
-	{
-		while (s[++k] != '\0' && s[k] != '$')
-			write(1, &s[k], 1);
-		if (s[k] == '$')
-		{
-			var = var_name(s + k);
-			varr = getenv(var);
-			f_putstr(varr);
-			s = s + k + f_strlen(var) + 2;
-		}
-		f_putstr(s);
-	}
-	else if (s[k] == '$')
-	{
-		var = var_name(s + k);
-		varr = getenv(var);
-		f_putstr(varr);
-	}
-	return 0;
-}
-
 void	our_echo(char **av)
 {
 	int	i;
-	int	d;
 	char	c;
 
 	c = 'y';
@@ -183,11 +134,7 @@ void	our_echo(char **av)
 	}
 	while (av[i] != NULL)
 	{
-		d = f_strchr(av[i], '$');
-		if (d != -1)
-			dollar_sign(av[i]);
-		else
-			f_putstr(av[i]);
+		f_putstr(av[i]);
 		if (av[i + 1] != NULL)
 			write(1, " ", 1);
 		if (av[i + 1] == NULL && c == 'y')
