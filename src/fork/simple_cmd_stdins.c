@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd_stdins.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:54:07 by siun              #+#    #+#             */
-/*   Updated: 2024/01/12 18:07:11 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/14 06:18:58 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	heredoc_input(/*int filefd, */char *word)
 	int		i;
 
 	i = 0;
-	text = (char **)malloc(sizeof(char *));
-	text[0] = NULL;
+	text = NULL;
 	line = readline("heredoc> ");
 	if (!line)
 		exit(1);

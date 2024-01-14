@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_a_command.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 19:12:24 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/05 15:46:43 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/14 06:05:43 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_cmd	*extract_command(char *str)
 		return (NULL);
 	cmd_tree = NULL;
 	chopped_str = input_validation(str);
+	replace_exit_status(&chopped_str);
 	if (!chopped_str)
 		return (NULL);
 	token = token_data(chopped_str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:52:41 by irivero-          #+#    #+#             */
-/*   Updated: 2024/01/12 18:04:04 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/14 06:06:24 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ t_stdio	*find_last_out(t_stdio *stdios);
 void	connect_last_out(int pipe_out, t_stdio *last_out);
 void	connect_last_in(int pipe_in, t_stdio *last_in);
 void	write_pipefd(int (*pipefd)[2], int pipe_exist, int old_pipe[2], int new_pipe[2]);
-void		wait_each_commands(t_cmd *tree);
+void	wait_each_commands(t_cmd *tree);
 
 //parsing
 char	**chopping_str(char *str);
@@ -172,6 +172,7 @@ int		syntax_redirects(char **cmd_line, int *token, int *i, t_cmd **node);
 int		syntax_simple_redirect(char **cmd_line, /*int *token,*/ int *i, t_cmd **node);
 t_cmd	*generate_tree_node(int node_type, int pipe_e);
 t_cmd	*generate_end_node(char **line, int node_type, int start, int end);
+void	replace_exit_status(char ***argv);
 
 // get_envpath.c
 char	**paths_array(char **envp);

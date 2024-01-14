@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:07:25 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/09 15:06:16 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/14 06:25:44 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,14 @@ void	update_redirfd(int *pipefd, t_stdio *stdios)
 	if (last_in != NULL)
 	{
 		connect_last_in(pipefd[0], last_in);
-		close(pipe_tmp[0]);
+		if ((pipefd)[0] != -1)
+			close(pipe_tmp[0]);
 	}
 	if (last_out != NULL)
 	{
 		connect_last_out(pipefd[1], last_out);
-		close(pipe_tmp[1]);
+		if ((pipefd)[0] == -1)
+			close(pipe_tmp[1]);
 	}
 }
 

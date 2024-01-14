@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: subpark <subpark@student.42.fr>            +#+  +:+       +#+         #
+#    By: siun <siun@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 16:59:02 by subpark           #+#    #+#              #
-#    Updated: 2024/01/09 17:51:04 by subpark          ###   ########.fr        #
+#    Updated: 2024/01/14 06:08:17 by siun             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS = src/builtins/unset.c\
  src/parsing/lexical_analysis.c\
  src/parsing/syntax_analysis.c\
  src/parsing/tree_node_gen.c\
+ src/parsing/argv_modification.c\
  src/tools/free_tools.c\
  src/tools/ft_strcmp.c\
  src/tools/get_envpath.c\

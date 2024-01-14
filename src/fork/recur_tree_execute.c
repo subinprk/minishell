@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   recur_tree_execute.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/12 16:33:19 by subpark          ###   ########.fr       */
+/*   Updated: 2024/01/14 06:21:49 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp, t_envp *env)
 	}
 	if (pipe(new_pipe) == -1)
 		return (perror("Pipe: "));//exit with signals
+	update_redirfd(pipefd, *stdios);
 	pid = fork();
 	if (pid < 0)
 		return (perror("Fork: "));
 	else if (pid == 0)
 	{
-		update_redirfd(pipefd, *stdios);
 		update_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
 		if (check_builtin(cmd->left_child))
 		{
