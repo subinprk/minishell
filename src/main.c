@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:48:01 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/09 17:52:23 by subpark          ###   ########.fr       */
+/*   Updated: 2024/02/02 17:45:25 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	interactive_mode(t_cmd **tree, char **envp, t_envp *env)
 
 	while (1)
 	{
-		set_signals_interactive();
+		set_signals_interactive(-1);
 		print_prompt();
 		tmp = readline(" ");
 		add_history(tmp);

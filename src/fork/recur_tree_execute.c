@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/14 06:29:49 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/02 16:56:25 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp, t_envp *env)
 		return (perror("Fork: "));
 	else if (pid == 0)
 	{
+		set_signals_interactive(pid);
 		update_redirfd(pipefd, *stdios);
 		update_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
 		if (check_builtin(cmd->left_child))
@@ -60,6 +61,7 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp, t_envp *env)
 	}
 	else
 	{
+		set_signals_interactive(pid);
 		if (!ft_strcmp(cmd->right_child->cmdstr[0], "exit"))
 			exit_command();
 		else if (!ft_strcmp(cmd->right_child->cmdstr[0], "unset"))

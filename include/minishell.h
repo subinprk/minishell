@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:52:41 by irivero-          #+#    #+#             */
-/*   Updated: 2024/01/14 06:06:24 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/02 17:32:47 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,9 +205,12 @@ int		find_next_redirection(int *token, int *i);
 
 
 // handle_signal.c
-void	set_signals_interactive(void);
+//void	set_signals_interactive(void);
 //void	set_signals_noninteractive(void);
+void	signal_reset_prompt(int signal);
+void	set_signals_interactive(pid_t pid);
 void	print_prompt();
+void	signal_parent_handle(void);
 
 // ch_complete.c (FERDAWS)
 char	**input_validation(char *tmp, char **env);
