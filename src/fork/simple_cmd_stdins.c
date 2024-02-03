@@ -6,13 +6,13 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:54:07 by siun              #+#    #+#             */
-/*   Updated: 2024/01/14 06:18:58 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/04 00:43:08 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	heredoc_input(/*int filefd, */char *word)
+void	heredoc_input(int filefd, char *word)
 {
 	char	*line;
 	char	**text;
@@ -28,12 +28,10 @@ void	heredoc_input(/*int filefd, */char *word)
 		text = append_2d_array(text, line);
 		free(line);
 		line = readline("heredoc> ");
-		printf("%s", text[i]);
 		i ++;
 	}
 	free(line);
-	//printf("before using that function: %s", text[0]);
-	write_every_array(text);
+	write_every_array(filefd, text);
 	free_2d(text);
 }
 
@@ -64,15 +62,17 @@ void	connect_last_in(int pipe_in, t_stdio *last_in)
 	}
 	else if (last_in->re_type == REL_TYPE_LL)//have to make heredoc
 	{
-	//	filefd = open(".___tmp__4heredoc", O_CREAT | O_RDWR, 0666);//making tmp file
-	//	if (!filefd)
-	//		exit(errno);
-		heredoc_input(/*&filefd,*/ last_in->filename);
-	//	re_type_l_pipes(filefd, pipe_in);///have to remove tmp file, have to think about it later
+		filefd = open(".___tmp__4heredoc", O_CREAT | O_RDWR, 0666);//making tmp file
+		if (!filefd)
+			exit(errno);
+		heredoc_input(filefd, last_in->filename);
+		// close(filefd);
+		// filefd = open("___tmp__4heredoc", O_RDONLY);
+		// if (!filefd)
+		// 	exit(errno);
+		re_type_l_pipes(filefd, pipe_in);
 		//unlink()
 	}
-	//if (filefd == -1)
-	//	close(filefd);
 }
 
 t_stdio	*find_last_in(t_stdio *stdios)

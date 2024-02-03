@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy_2d_arr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:32:20 by siun              #+#    #+#             */
-/*   Updated: 2024/01/12 18:11:51 by subpark          ###   ########.fr       */
+/*   Updated: 2024/02/04 00:27:39 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,17 @@ char	**append_2d_array(char **origin, char *line)
 	char	**tmp;
 
 	array_length = array_length_2d(origin);
-	printf("array length : %d\n", array_length);
-	tmp = (char **)malloc(sizeof(char *) * (array_length) + 2);
+	tmp = (char **)malloc(sizeof(char *) * (array_length + 2));
 	i = 0;
-	while (origin[i] != NULL)
+	while (origin != NULL && origin[i] != NULL)
 	{
-		tmp[i] = ft_strdup(origin[i]);
-		printf("%d times happening inside\n", i);
+		tmp[i] = strdup(origin[i]);
 		i ++;
 	}
-	tmp[i] = ft_strdup(line);
+	tmp[i] = strdup(line);
 	tmp[array_length + 1] = NULL;
-	free_2d(origin);
+	if (origin)
+		free_2d(origin);
 	return (tmp);
 }
 
@@ -80,14 +79,15 @@ char	**text_array_part_cpy(char **line, int start, int end)
 	return (part);
 }
 
-void	write_every_array(char **array)
+void	write_every_array(int filefd, char **array)
 {
 	int	i;
 
 	i = 0;
 	while (array[i] != NULL)
 	{
-		printf("%s", array[i]);
+		write(filefd, array[i], ft_strlen(array[i]));
+		write(filefd, "\n", 1);
 		i ++;
 	}
 }

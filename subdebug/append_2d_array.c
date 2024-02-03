@@ -54,40 +54,65 @@ char	**cpy_full_2d_array(char **origin)
 	return (array);
 }
 
-void	append_2d_array(char ***origin, char *line)
+char	**append_2d_array(char **origin, char *line)
 {
 	int		i;
 	int		array_length;
 	char	**tmp;
 
-	array_length = array_length_2d(*origin);
-	printf("array length : %d", array_length);
-	tmp = cpy_full_2d_array(*origin);
-	if (*origin != NULL)
-		free_2d(*origin);
-	*origin = (char **)malloc(sizeof(char *) * (array_length + 2));
+	array_length = array_length_2d(origin);
+	tmp = (char **)malloc(sizeof(char *) * (array_length + 2));
 	i = 0;
-	while (i < array_length)
+	while (origin != NULL && origin[i] != NULL)
 	{
-		(*origin)[i] = strdup(tmp[i]);
+		tmp[i] = strdup(origin[i]);
 		i ++;
 	}
-	(*origin)[array_length] = strdup(line);
-	printf("copied origin: %s\n", (*origin)[array_length]);
-	printf("array length: %d\n", array_length);
-	if (tmp != NULL)
-		free_2d(tmp);
-	(*origin)[array_length + 1] = NULL;
+	tmp[i] = strdup(line);
+	tmp[array_length + 1] = NULL;
+	if (origin)
+		free_2d(origin);
+	return (tmp);
 }
+
+// void	append_2d_array(char ***origin, char *line)
+// {
+// 	int		i;
+// 	int		array_length;
+// 	char	**tmp;
+
+// 	array_length = array_length_2d(*origin);
+// 	printf("array length : %d", array_length);
+// 	tmp = cpy_full_2d_array(*origin);
+// 	if (*(origin) != NULL)
+// 		free_2d(*(origin));
+// 	*origin = (char **)malloc(sizeof(char *) * (array_length + 2));
+// 	i = 0;
+// 	while (i < array_length)
+// 	{
+// 		(*origin)[i] = strdup(tmp[i]);
+// 		i ++;
+// 	}
+// 	(*origin)[array_length] = strdup(line);
+// 	printf("copied origin: %s\n", (*origin)[array_length]);
+// 	printf("array length: %d\n", array_length);
+// 	if (tmp != NULL)
+// 		free_2d(tmp);
+// 	(*origin)[array_length + 1] = NULL;
+// }
 
 
 int main() {
     // Example usage
     char **myArray = NULL;
-    append_2d_array(&myArray, "Line 1");
-    append_2d_array(&myArray, "Line 2");
+    myArray = append_2d_array(myArray, "Line 1");
+    myArray = append_2d_array(myArray, "Line 2");
 
     // ... do something with myArray ...
+	for (int i = 0; myArray[i] != NULL; i++)
+	{
+		printf("%s\n", myArray[i]);
+	}
 
     // Don't forget to free the memory when done
     free_2d(myArray);
