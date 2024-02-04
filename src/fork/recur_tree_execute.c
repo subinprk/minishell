@@ -6,21 +6,24 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/02 16:56:25 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/04 13:57:56 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	red_error_handle(t_cmd *type)
+int	red_error_handle(t_cmd *type, pid_t pid)
 {
 	if (type->cmdstr[0][0] == '<' || type->cmdstr[0][0] =='>')
 	{
 		g_exit_status = 0;
-		exit (g_exit_status);
+		if (pid == 0)
+			exit (g_exit_status);
+		else
+			return (1);
 	}
 	else
-		return ;
+		return(0);
 }
 
 void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp, t_envp *env)
@@ -54,7 +57,7 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp, t_envp *env)
 		}
 		else
 		{
-			red_error_handle(cmd->left_child);
+			red_error_handle(cmd->left_child, pid);
 	 		print_error_cmd(cmd->left_child, envp);
 			exec(cmd->right_child->cmdstr, envp);
 		}
@@ -62,6 +65,8 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp, t_envp *env)
 	else
 	{
 		set_signals_interactive(pid);
+		if (red_error_handle(cmd->left_child, pid))
+			return ;
 		if (!ft_strcmp(cmd->right_child->cmdstr[0], "exit"))
 			exit_command();
 		else if (!ft_strcmp(cmd->right_child->cmdstr[0], "unset"))
