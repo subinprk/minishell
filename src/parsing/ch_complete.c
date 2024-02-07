@@ -277,15 +277,18 @@ int	expansion(t_data *data, char **env)
 	while (data->array[i] != NULL)
 	{
 		d = f_strchr(data->array[i], '$');
-		if (d != -1 && (f_strchr(data->array[i], '\'') == -1))		// expandieren!
+		if (d != -1 && (f_strchr(data->array[i], '\'') == -1) && data->array[i][d + 1] != '?')
 		{
 			v = var_finder(env, data->array[i] + d + 1);
 			if (v == -1)
-				return (-1);
+			{
+				data->array[i] = str_modifier(data->array[i], "\n", d);
+				return (0);
+			}
 			data->array[i] = str_modifier(data->array[i], env[v], d);
+			if (data->array[i] == NULL)
+				return (-1);
 		}
-		
-
 		i++;
 	}
 	return (0);

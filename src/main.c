@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:48:01 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/02 17:45:25 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/07 08:06:59 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	print_prompt(void)
 void	interactive_mode(t_cmd **tree, char **envp, t_envp *env)
 {
 	char	*tmp;
+	env->cd_hist = NULL;
 
 	while (1)
 	{

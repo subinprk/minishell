@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:52:41 by irivero-          #+#    #+#             */
-/*   Updated: 2024/02/04 00:25:23 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/07 08:26:23 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ typedef struct s_stdio
 
 typedef struct s_envp
 {
-	int	k;
 	char	**envp;
+	char	*cd_hist;
 }	t_envp;
 
 extern char	**g_envp;
@@ -84,7 +84,7 @@ extern int	g_exit_status;
 int		cd_to_home_directory(char *current_path, char **cmdline, char **envs);
 int		cd_to_env_variable(char *current_path, char **cmdline, char **envs);
 void	update_pwd_variables(char **envs);
-void	change_directory(char **paths);
+void    change_directory(char **paths, t_envp *env);
 
 //echo
 void	exit_status(void);
@@ -101,7 +101,7 @@ int	f_strlen(char *s);
 
 //exit
 void    exit_err(void);
-void	exit_command(void);
+void    exit_command(char **av);
 //void    exit_command(t_cmd *cmd, char **cmdline);
 
 //export
@@ -112,13 +112,13 @@ int		update_or_add_export(char *str, char ***env);
 void    export(char **builtin, t_envp *env);
 
 //pwd
-void    our_pwd(char **av);
+char    *our_pwd(char **av, int pflag);
 
 //unset
 int 	is_valid_env_variable_name (char *str);
 int		check_env_variable(char *key, char *env);
 int 	unset_enviroment_variable(char *key, char ***env);
-void    ft_unset(char **cmdline, t_envp *env);
+void    ft_unset(char *v_name, t_envp *env);
 
 //tools
 void	free_2d(char **arr);
@@ -214,5 +214,6 @@ void	signal_parent_handle(void);
 
 // ch_complete.c (FERDAWS)
 char	**input_validation(char *tmp, char **env);
+int	var_finder(char **env, char *s);
 
 #endif

@@ -45,7 +45,7 @@ void	builtin_action(t_cmd *builtin, char **cmdline, t_envp *env)
 	if (!ft_strcmp(builtin->cmdstr[0], "echo"))
 		our_echo(cmdline);
 	else if (!ft_strcmp(builtin->cmdstr[0], "pwd"))
-		our_pwd(builtin->cmdstr);
+		our_pwd(builtin->cmdstr, 1);
 	else if (!ft_strcmp(builtin->cmdstr[0], "env"))
 		ft_env(env);
 }
