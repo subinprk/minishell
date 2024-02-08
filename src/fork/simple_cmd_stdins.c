@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:54:07 by siun              #+#    #+#             */
-/*   Updated: 2024/02/08 17:23:06 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 17:36:07 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	connect_last_in(t_stdio *last_in)
 		close(filefd);
 		filefd = open(".___tmp__4heredoc", O_RDONLY);
 		re_type_l_pipes(filefd);
-		//unlink()
+		unlink(".___tmp__4heredoc");
 	}
 }
 
