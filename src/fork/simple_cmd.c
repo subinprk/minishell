@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:07:25 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/08 16:27:08 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 17:02:11 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,10 @@
 void	update_pipefd(int pipefd[2],int old_input, int pipe_exist)
 {
 	close(pipefd[0]);
-	if (old_input != -1) //if there is previous pipe
+	if (old_input != -1)
 		(dup2(old_input, 0));
-	if (pipe_exist == -1) // if there is no further pipe
-	{
+	if (pipe_exist == -1)
 		close(pipefd[1]);
-		//close(old_input);
-	}
 	else
 		dup2(pipefd[1], 1);
 }

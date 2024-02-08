@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:11:50 by subpark           #+#    #+#             */
-/*   Updated: 2023/12/12 21:21:00 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 17:05:37 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ void	print_error_cmd(t_cmd *file_path, char **envp)
 
 int	check_builtin(t_cmd *file_path)
 {
-	if (!ft_strcmp(file_path->cmdstr[0], "echo") || !ft_strcmp(file_path->cmdstr[0], "cd")
-		|| !ft_strcmp(file_path->cmdstr[0], "pwd") || !ft_strcmp(file_path->cmdstr[0], "export")
-		|| !ft_strcmp(file_path->cmdstr[0], "unset") || !ft_strcmp(file_path->cmdstr[0], "env")
+	if (!ft_strcmp(file_path->cmdstr[0], "echo")
+		|| !ft_strcmp(file_path->cmdstr[0], "cd")
+		|| !ft_strcmp(file_path->cmdstr[0], "pwd")
+		|| !ft_strcmp(file_path->cmdstr[0], "export")
+		|| !ft_strcmp(file_path->cmdstr[0], "unset")
+		|| !ft_strcmp(file_path->cmdstr[0], "env")
 		|| !ft_strcmp(file_path->cmdstr[0], "exit"))
 		return (1);
 	else
@@ -48,4 +51,5 @@ void	builtin_action(t_cmd *builtin, char **cmdline, t_envp *env)
 		our_pwd(builtin->cmdstr, 1);
 	else if (!ft_strcmp(builtin->cmdstr[0], "env"))
 		ft_env(env);
+	exit(errno);
 }

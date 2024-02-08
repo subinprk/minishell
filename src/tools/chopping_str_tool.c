@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chopping_str_tool.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:02:21 by subpark           #+#    #+#             */
-/*   Updated: 2023/12/07 17:06:18 by subpark          ###   ########.fr       */
+/*   Updated: 2024/02/08 16:58:31 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,6 @@ void	find_rellocator(char *str, int *i, int *count)
 		(*count) ++;
 	}
 }
-
-/*void	find_spaces(char *str, int *i, int *count)
-{
-	if (str[*i] == ' ')
-	while (str[*i] == ' ')
-		(*i) ++;
-	(*count) ++;
-}*/
 
 char	*strdup_rellocator(char *str, int *i)
 {

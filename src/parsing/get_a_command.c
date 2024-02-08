@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 19:12:24 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/14 06:05:43 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 17:01:41 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ t_cmd	*extract_command(char *str, t_envp *env)
 	token = token_data(chopped_str);
 	if (!token)
 		return (NULL);
-	//function that parsing token & generate cmd linked list
 	i[0] = 0;
 	i[1] = token_length(token);
 	tmp = syntax_pipe(chopped_str, token, i, &cmd_tree);

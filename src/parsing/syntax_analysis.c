@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_analysis.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 03:40:29 by siun              #+#    #+#             */
-/*   Updated: 2024/01/09 19:43:16 by subpark          ###   ########.fr       */
+/*   Updated: 2024/02/08 17:01:13 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,6 @@ int	syntax_cmds(char **cmd_line, int *token, int *i, t_cmd **node)
 	redirect_index = find_redirection(token, i);
 	if (redirect_index != -1)
 		i[1] = redirect_index;
-	/*if (redirect_index == i[0])
-	{
-		perror("syntax error near unexpected token");
-		return (-1);
-	}*/
 	if (syntax_simple_cmd(cmd_line, i, token, &((*node)->right_child)) != 1)
 		return (-1);
 	if (redirect_index != -1)
@@ -92,7 +87,7 @@ int	syntax_redirects(char **cmd_line, int *token, int *i, t_cmd **node)
 	next_redirect_index = find_next_redirection(token, i);
 	if (next_redirect_index != -1)
 		i[1] = next_redirect_index - 1;
-	if (syntax_simple_redirect(cmd_line, /*token,*/ i, &((*node)->left_child)) == -1)
+	if (syntax_simple_redirect(cmd_line, i, &((*node)->left_child)) == -1)
 		return (-1);
 	if (next_redirect_index != -1)
 	{
@@ -103,7 +98,7 @@ int	syntax_redirects(char **cmd_line, int *token, int *i, t_cmd **node)
 	return (1);
 }
 
-int	syntax_simple_redirect(char **cmd_line, /*int *token,*/ int *i, t_cmd **node)
+int	syntax_simple_redirect(char **cmd_line, int *i, t_cmd **node)
 {
 	*node = generate_tree_node(NODE_SIMPLE_REDIRECT, -1);
 	(*node)->left_child = generate_end_node(cmd_line, NODE_RED_TYPE,

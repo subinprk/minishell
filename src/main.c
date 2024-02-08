@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:48:01 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/08 16:53:55 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 16:57:52 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	interactive_mode(t_cmd **tree, char **envp, t_envp *env)
 		tmp = readline(" ");
 		add_history(tmp);
 		if (!tmp)
-			exit(0);//have to add some exiting things
+			exit(0);
 		*tree = extract_command(tmp, env);
 		search_tree(*tree, envp, env);
 		printf("exit status %d\n", g_exit_status);
@@ -51,8 +51,6 @@ void	non_interactive_mode(t_cmd **tree, char *input, char **envp, t_envp *env)
 	int		i;
 
 	user_inputs = ft_split(input, ';');
-	//if (!user_inputs)
-	//	exit_shell();
 	i = 0;
 	while (user_inputs[i])
 	{
@@ -78,42 +76,4 @@ int main(int argc, char **argv, char **envs)
 	else if (isatty(STDIN_FILENO))
 		interactive_mode(&tree, envp, &env);
 	free_2d(envp);
-	//exit_shell();
 }
-/*
-int main(int argc, char **argv, char **envs)
-{
-//	char	**line;
-	int		index, i;
-	char	*tmp;
-	char	**envp;
-	t_cmd	*tree;
-
-//	line = NULL;
-	if (argc && argv)
-
-//subin: should be initialised as a function for norminette later
-	i = 0;
-	index = 0;
-	g_envp = cpy_full_2d_array(envs);
-	envp = paths_array(envs);
-	set_signal();
-
-	while(argc && argv[0] != NULL i < 5)
-	{
-		//get_line(line);
-		//tree = extract_command(line[index]);
-		generate_prompt();
-		tmp = readline(" ");
-		tree = extract_command(tmp);
-		search_tree(tree, envp);
-		index ++;
-		free(tmp);
-		free_tree(tree);
-		i++;
-	}
-//also freeing shoud be in different function
-	free_2d(envp);
-	free_2d(g_envp);
-	exit(g_exit_status);
-}*/

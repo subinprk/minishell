@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 15:48:47 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/02 17:39:35 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 17:00:10 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@ void	ignore_sigquit(void)
 	ft_bzero(&act, sizeof(act));
 	act.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &act, NULL);
-}
-
-void	signal_print_newline(int signal)
-{
-	(void)signal;
-	rl_on_new_line();
-	//have to be discussed
 }
 
 void	signal_reset_prompt(int signal)
@@ -59,5 +52,3 @@ void	set_signals_interactive(pid_t pid)
 	else
 		signal_parent_handle();
 }
-
-// void	hered

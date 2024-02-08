@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexical_analysis.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 02:36:57 by siun              #+#    #+#             */
-/*   Updated: 2024/01/05 16:30:45 by subpark          ###   ########.fr       */
+/*   Updated: 2024/02/08 17:01:36 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-/*
-int	is_it_same(char *str1, char *str2)
-{
-	int	i;
-
-	i = 0;
-	while (!str1[i] || !str2[i])
-	{
-		if (str1[i] != str2[i])
-			return (0);
-		i ++;
-	}
-	return (1);
-}*/
 
 int	is_it_rellocater(char *str)
 {
@@ -66,7 +52,6 @@ int	*token_data(char **chopped_str)
 	while (i < token_num)
 	{
 		token[i] = allocate_token(chopped_str[i]);
-//		printf("token number : %d\n", token[i]);
 		i ++;
 	}
 	token[token_num] = TOK_NULL_HANDLE;
