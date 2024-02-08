@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:54:07 by siun              #+#    #+#             */
-/*   Updated: 2024/02/08 14:21:41 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 16:32:35 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	connect_last_in(t_stdio *last_in)
 		if (!filefd)
 			exit(errno);
 		heredoc_input(filefd, last_in->filename);
+		close(filefd);
+		filefd = open(".___tmp__4heredoc", O_RDONLY);
 		re_type_l_pipes(filefd);
 		//unlink()
 	}
@@ -87,22 +89,3 @@ t_stdio	*find_last_in(t_stdio *stdios)
 	}
 	return (last_in);
 }
-
-// void	pipe_stdins(int *pipefd, t_stdio *stdios)
-// {
-// 	t_stdio	*last_in;
-// 	t_stdio	*curr;
-
-// 	last_in = NULL;
-// 	curr = stdios;
-// 	while (curr)
-// 	{
-// 		if (curr->re_type == REL_TYPE_L || curr->re_type == REL_TYPE_LL)
-// 			last_in = curr;
-// 		curr = curr->next_stdio;
-// 	}
-// 	if (last_in != NULL)
-// 		connect_stdins(last_in, pipefd);
-// 	else
-// 		return ;//useless, but afraid to remove pipefd parameter...
-// }

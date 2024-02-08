@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/08 13:16:55 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 16:20:40 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,10 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp, t_envp *env)
 			change_directory(cmd->right_child->cmdstr, env);
 		write_pipefd(pipefd, &old_input, cmd->pipe_exist);
 		waitpid(-1, &g_exit_status, WNOHANG);
-		free_stdios(*stdios);
+		if (find_last_in(*(stdios))!= NULL && find_last_in(*(stdios))->re_type == REL_TYPE_LL)
+			waitpid(-1, &g_exit_status, 0);
+		else
+			free_stdios(*stdios);
 		*stdios = NULL;
 	}
 }
