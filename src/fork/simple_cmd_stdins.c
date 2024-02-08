@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:54:07 by siun              #+#    #+#             */
-/*   Updated: 2024/02/08 13:53:55 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 14:21:41 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	connect_last_in(t_stdio *last_in)
 	}
 	else if (last_in->re_type == REL_TYPE_LL)//have to make heredoc
 	{
-		filefd = open(".___tmp__4heredoc", O_CREAT | O_RDWR, 0666);//making tmp file
+		filefd = open(".___tmp__4heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);//making tmp file
 		if (!filefd)
 			exit(errno);
 		heredoc_input(filefd, last_in->filename);
