@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+         #
+#    By: siun <siun@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 16:59:02 by subpark           #+#    #+#              #
-#    Updated: 2024/02/07 08:26:49 by ubuntu           ###   ########.fr        #
+#    Updated: 2024/02/08 16:54:19 by siun             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,6 @@ LIBFT_PATH	= $(LIBFT_DIR)/$(LIBFT)
 
 CCFLAGS = -Wall -Werror -Wextra
 LDFLAGS = -L/usr/lib/x86_64-linux-gnu -lreadline
-
-GREEN = \033[0;32m
-BLUE = \033[0;34m
-RESET = \033[0m
 
 CC = cc -g
 
@@ -39,7 +35,6 @@ SRCS = src/builtins/unset.c\
  src/fork/simple_cmd_stdouts.c\
  src/fork/simple_cmd_tools.c\
  src/fork/wait_commands.c\
- src/handle_signal.c\
  src/parsing/ch_complete.c\
  src/parsing/get_a_command.c\
  src/parsing/lexical_analysis.c\
@@ -54,10 +49,7 @@ SRCS = src/builtins/unset.c\
  src/tools/chopping_str_tool.c\
  src/tools/chopping_word_tools.c\
  src/tools/copy_2d_arr.c\
- src/generate_prompt.c\
  src/main.c\
- src/utils.c\
- src/utils2.c\
  src/signals/signal.c
 
 OBJS = $(SRCS:.c=.o)

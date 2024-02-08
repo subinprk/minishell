@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:48:01 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/07 08:06:59 by ubuntu           ###   ########.fr       */
+/*   Updated: 2024/02/08 16:53:55 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int		g_exit_status = 0;
 
 void	print_prompt(void)
 {
