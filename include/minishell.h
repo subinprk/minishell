@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:52:41 by irivero-          #+#    #+#             */
-/*   Updated: 2024/02/08 13:16:26 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/09 00:39:09 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,7 @@ int		find_next_redirection(int *token, int *i);
 //void	set_signals_noninteractive(void);
 void	signal_reset_prompt(int signal);
 void	set_signals_interactive(pid_t pid);
-void	print_prompt();
+char    *print_prompt(void);
 void	signal_parent_handle(void);
 
 // ch_complete.c (FERDAWS)

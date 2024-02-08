@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:48:01 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/08 17:36:02 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/09 00:38:19 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,29 @@
 
 int		g_exit_status = 0;
 
-void	print_prompt(void)
+char    *print_prompt(void)
 {
-	char	cwd[1024];
-
-	getcwd(cwd, sizeof(cwd));
-	printf("%s", cwd);
+        char    *cwd;
+        int     i;
+        cwd = malloc(1024 * sizeof(char));
+        getcwd(cwd, 1024);
+        i = f_strlen(cwd);
+        cwd[i] = ' ';
+        cwd[i + 1] = '\0';
+        return (cwd);
 }
 
 void	interactive_mode(t_cmd **tree, char **envp, t_envp *env)
 {
 	char	*tmp;
+	char	*cwd;
 	env->cd_hist = NULL;
 
 	while (1)
 	{
 		set_signals_interactive(-1);
-		print_prompt();
-		tmp = readline(" ");
+		cwd = print_prompt();
+		tmp = readline(cwd);
 		add_history(tmp);
 		if (!tmp)
 			exit(0);

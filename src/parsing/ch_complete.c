@@ -267,6 +267,25 @@ char	*str_modifier(char *str, char *var, int d)
 	return (tmp);
 }
 
+char	*str_quo_modifier(char *str)
+{
+	int		k;
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	k = f_strlen(str);
+	tmp = malloc((k - 1) * sizeof(char));
+	str[k - 1] = '\0';
+	while (str[i] != '\0')
+	{
+		tmp[i] = str[i + 1];
+		i++;
+	}
+	free(str);
+	return (tmp);
+}
+
 int	expansion(t_data *data, char **env)
 {
 	int	i;
@@ -286,6 +305,12 @@ int	expansion(t_data *data, char **env)
 				return (0);
 			}
 			data->array[i] = str_modifier(data->array[i], env[v], d);
+			if (data->array[i] == NULL)
+				return (-1);
+		}
+		else if (data->array[i][0] == '\'')
+		{
+			data->array[i] = str_quo_modifier(data->array[i]);
 			if (data->array[i] == NULL)
 				return (-1);
 		}
