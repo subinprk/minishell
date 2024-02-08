@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:32:20 by siun              #+#    #+#             */
-/*   Updated: 2024/02/04 00:27:39 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 17:30:55 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**cpy_full_2d_array(char **origin)
 	if (!array)
 		exit(errno);
 	i = 0;
-	while(i < origin_length)
+	while (i < origin_length)
 	{
 		array[i] = ft_strdup(origin[i]);
 		if (!array[i])

@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 01:07:41 by siun              #+#    #+#             */
-/*   Updated: 2024/02/08 17:02:54 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 17:23:21 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,5 @@ t_stdio	*find_last_out(t_stdio *stdios)
 			last_out = curr;
 		curr = curr->next_stdio;
 	}
-	return(last_out);
+	return (last_out);
 }

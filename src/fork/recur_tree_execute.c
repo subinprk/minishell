@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/08 17:05:57 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 17:25:00 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,10 @@ void	search_tree(t_cmd *node, char **envp, t_envp *env)
 	if (node == NULL)
 		return ;
 	execute_tree(node, &stdios, envp, env);
-	if (node->left_child && (node->left_child->node_type != NODE_RED_TYPE ||
-		node->left_child->node_type != NODE_FILE_PATH))
+	if (node->left_child && (node->left_child->node_type != NODE_RED_TYPE
+			|| node->left_child->node_type != NODE_FILE_PATH))
 		search_tree(node->left_child, envp, env);
-	if (node->right_child && (node->right_child->node_type != NODE_FILE_NAME ||
-		node->right_child->node_type != NODE_ARGV))
+	if (node->right_child && (node->right_child->node_type != NODE_FILE_NAME
+			|| node->right_child->node_type != NODE_ARGV))
 		search_tree(node->right_child, envp, env);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wait_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:41:27 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/09 17:51:18 by subpark          ###   ########.fr       */
+/*   Updated: 2024/02/08 17:25:52 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 
 int	count_commands(t_cmd *tree)
 {
-	int count;
+	int	count;
 
 	if (tree == NULL)
 		return (0);
 	count = 0;
-
 	if (tree->node_type == NODE_SIMPLE_CMD)
 		count ++;
 	count = count + count_commands(tree->left_child);
 	count = count + count_commands(tree->right_child);
-
 	return (count);
 }
 

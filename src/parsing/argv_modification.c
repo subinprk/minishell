@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 05:53:16 by siun              #+#    #+#             */
-/*   Updated: 2024/01/14 06:10:34 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 17:12:57 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	replace_exit_status(char ***argv)
 {
-	int	i;
-	char *tmp;
+	int		i;
+	char 	*tmp;
 
 	if ((*argv) == NULL || (**argv) == NULL)
 		return ;

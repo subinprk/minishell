@@ -6,13 +6,13 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:07:25 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/08 17:02:11 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 17:24:00 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	update_pipefd(int pipefd[2],int old_input, int pipe_exist)
+void	update_pipefd(int pipefd[2], int old_input, int pipe_exist)
 {
 	close(pipefd[0]);
 	if (old_input != -1)
@@ -40,7 +40,7 @@ void	write_pipefd(int pipefd[2], int *old_input, int pipe_exist)
 void	update_redirfd(t_stdio *stdios)
 {
 	t_stdio	*last_in;
-	t_stdio *last_out;
+	t_stdio	*last_out;
 
 	if (stdios == NULL)
 		return ;

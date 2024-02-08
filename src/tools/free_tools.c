@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:34:26 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/05 15:46:08 by subpark          ###   ########.fr       */
+/*   Updated: 2024/02/08 17:30:03 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_2d(char **arr)
 void	free_stdios(t_stdio *stdios)
 {
 	t_stdio	*curr;
-	t_stdio *next;
+	t_stdio	*next;
 
 	curr = stdios;
 	while (curr)

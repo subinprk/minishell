@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 19:12:24 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/08 17:01:41 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 17:13:32 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ t_cmd	*extract_command(char *str, t_envp *env)
 	if (tmp == -1)
 	{
 		free_tree(cmd_tree);
-		return(NULL);
+		return (NULL);
 	}
 	free_2d(chopped_str);
 	free(token);
 	return (cmd_tree);
 }
+

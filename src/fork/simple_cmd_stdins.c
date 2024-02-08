@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 23:54:07 by siun              #+#    #+#             */
-/*   Updated: 2024/02/08 17:04:32 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 17:23:06 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	heredoc_input(int filefd, char *word)
 	int		i;
 
 	i = 0;
-	line = ft_calloc(1,1);
+	line = ft_calloc(1, 1);
 	while (ft_strcmp(line, word) != 0)
 	{
 		free(line);
@@ -36,7 +36,7 @@ void	heredoc_input(int filefd, char *word)
 }
 
 void	re_type_l_pipes(int filefd)
-{	
+{
 	int	fd_tmp;
 
 	fd_tmp = dup2(filefd, 0);

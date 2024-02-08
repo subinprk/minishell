@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 03:40:29 by siun              #+#    #+#             */
-/*   Updated: 2024/02/08 17:01:13 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 17:21:58 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	syntax_pipe(char **cmd_line, int *token, int *i, t_cmd **node)
 		if (pipe_index == i[0])
 		{
 			write(2, "syntax error near unexpected token '|'\n",
-			ft_strlen("syntax error near unexpected token '|'\n"));
+				ft_strlen("syntax error near unexpected token '|'\n"));
 			g_exit_status = 1;
 			return (-1);
 		}
@@ -72,7 +72,8 @@ int	syntax_simple_cmd(char **cmd_line, int *i, int *token, t_cmd **node)
 	pipe_check[1] = token_length(token);
 	pipe_e = find_pipe(token, pipe_check);
 	*node = generate_tree_node(NODE_SIMPLE_CMD, pipe_e);
-	(*node)->left_child = generate_end_node(cmd_line, NODE_FILE_PATH, i[0], i[0] + 1);
+	(*node)->left_child = generate_end_node(cmd_line, NODE_FILE_PATH,
+			i[0], i[0] + 1);
 	(*node)->right_child = generate_end_node(cmd_line, NODE_ARGV, i[0], i[1]);
 	return (1);
 }
@@ -102,8 +103,8 @@ int	syntax_simple_redirect(char **cmd_line, int *i, t_cmd **node)
 {
 	*node = generate_tree_node(NODE_SIMPLE_REDIRECT, -1);
 	(*node)->left_child = generate_end_node(cmd_line, NODE_RED_TYPE,
-						i[0], i[0] + 1);
+			i[0], i[0] + 1);
 	(*node)->right_child = generate_end_node(cmd_line, NODE_FILE_NAME,
-						i[0] + 1, i[1]);
+			i[0] + 1, i[1]);
 	return (1);
 }
