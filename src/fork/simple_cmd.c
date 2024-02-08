@@ -6,73 +6,53 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:07:25 by subpark           #+#    #+#             */
-/*   Updated: 2024/01/14 06:25:44 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 13:41:26 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	write_pipefd(int (*pipefd)[2], int pipe_exist, int old_pipe[2], int new_pipe[2])
+void	update_pipefd(int pipefd[2],int old_input, int pipe_exist)
 {
-	if ((*pipefd)[0] == -1) //if there is no previous pipe
-		(*pipefd)[0] = 0;
-	else
-	{
-		(*pipefd)[0] = old_pipe[0];
-		close(old_pipe[0]);
-		close(old_pipe[1]);
-	}
+	close(pipefd[0]);
+	if (old_input != -1) //if there is previous pipe
+		(dup2(old_input, 0));
 	if (pipe_exist == -1) // if there is no further pipe
 	{
-		close(new_pipe[0]);
-		(*pipefd)[0] = -1;
-		(*pipefd)[1] = -1;
+		close(pipefd[1]);
+		close(old_input);
 	}
 	else
-		(*pipefd)[1] = new_pipe[1];
-	close(new_pipe[1]);
+		dup2(pipefd[1], 1);
 }
 
-void	update_pipefd(int (*pipefd)[2], int pipe_exist, int old_pipe[2], int new_pipe[2])
+void	write_pipefd(int pipefd[2], int *old_input, int pipe_exist)
 {
-	close(new_pipe[0]);// anyway newpipe read is no useful after forked
-	if ((*pipefd)[0] == -1) //if there is no previous pipe
-		(*pipefd)[0] = 0;
-	else
+	close(pipefd[1]);
+	if (*old_input != -1)
+		close(*old_input);
+	if (pipe_exist == -1)
 	{
-		(*pipefd)[0] = dup2(old_pipe[0], 0);
-		close(old_pipe[1]);
+		close(pipefd[0]);
+		*old_input = -1;
 	}
-	if (pipe_exist == -1) //if there is no further pipe
-		close(new_pipe[1]);
 	else
-		(*pipefd)[1] = dup2(new_pipe[1], 1);
+		*old_input = pipefd[0];
 }
 
-void	update_redirfd(int *pipefd, t_stdio *stdios)
+void	update_redirfd(t_stdio *stdios)
 {
 	t_stdio	*last_in;
 	t_stdio *last_out;
-	int		pipe_tmp[2];
 
 	if (stdios == NULL)
 		return ;
-	pipe_tmp[0] = pipefd[0];
-	pipe_tmp[1] = pipefd[1];
 	last_in = find_last_in(stdios);
 	last_out = find_last_out(stdios);
 	if (last_in != NULL)
-	{
-		connect_last_in(pipefd[0], last_in);
-		if ((pipefd)[0] != -1)
-			close(pipe_tmp[0]);
-	}
+		connect_last_in(last_in);
 	if (last_out != NULL)
-	{
-		connect_last_out(pipefd[1], last_out);
-		if ((pipefd)[0] == -1)
-			close(pipe_tmp[1]);
-	}
+		connect_last_out(last_out);
 }
 
 // void	simple_cmd_action(t_cmd *cmd, int *pipefd, char **envp)

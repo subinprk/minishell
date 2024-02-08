@@ -6,7 +6,7 @@
 /*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/04 13:57:56 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/08 13:16:55 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,19 @@ int	red_error_handle(t_cmd *type, pid_t pid)
 
 void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp, t_envp *env)
 {
-	static int		pipefd[2] = {-1, -1};
-	static int		new_pipe[2];
-	int				old_pipe[2];
+	// static int		pipefd[2] = {-1, -1};
+	// static int		new_pipe[2];
+	// int				old_pipe[2];
+	int				pipefd[2];
+	static int		old_input = -1;
 	pid_t			pid;
 
-	if (pipefd[0] != -1) //for excepting the case of first time
-	{
-		old_pipe[0] = dup(new_pipe[0]);
-		close(new_pipe[0]);
-	}
-	if (pipe(new_pipe) == -1)
+	// if (pipefd[0] != -1) //for excepting the case of first time
+	// {
+	// 	old_pipe[0] = dup(new_pipe[0]);
+	// 	close(new_pipe[0]);
+	// }
+	if (pipe(pipefd) == -1)
 		return (perror("Pipe: "));//exit with signals
 	pid = fork();
 	if (pid < 0)
@@ -46,8 +48,8 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp, t_envp *env)
 	else if (pid == 0)
 	{
 		set_signals_interactive(pid);
-		update_redirfd(pipefd, *stdios);
-		update_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
+		update_redirfd(*stdios);
+		update_pipefd(pipefd, old_input, cmd->pipe_exist);
 		if (check_builtin(cmd->left_child))
 		{
 			builtin_action(cmd->right_child, cmd->right_child->cmdstr, env);
@@ -75,7 +77,7 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp, t_envp *env)
 			export(cmd->right_child->cmdstr + 1, env);
 		else if (!ft_strcmp(cmd->right_child->cmdstr[0], "cd"))
 			change_directory(cmd->right_child->cmdstr, env);
-		write_pipefd(&pipefd, cmd->pipe_exist, old_pipe, new_pipe);
+		write_pipefd(pipefd, &old_input, cmd->pipe_exist);
 		waitpid(-1, &g_exit_status, WNOHANG);
 		free_stdios(*stdios);
 		*stdios = NULL;
