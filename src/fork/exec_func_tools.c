@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_func_tools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:05:19 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/02 18:39:31 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/09 16:17:17 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,15 @@ void	exec(char **cmd, char **env)
 
 	if (!cmd || !cmd[0])
 		exit(0);
-	path = path_pointer(env, cmd[0]);
+	//printf("cmd[0]: <%s>\n", cmd[0]);
+	if (access(cmd[0], X_OK) == 0)
+		path = cmd[0];
+	else
+		path = path_pointer(env, cmd[0]);
 	if (!path)
 		exit(2);
+	if (var_finder(env, "PATH") == -1)
+		exit(1);
 	g_exit_status = execve(path, cmd, env);
 	if (path)
 		free(path);
