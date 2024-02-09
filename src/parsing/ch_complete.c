@@ -233,6 +233,8 @@ int	var_finder(char **env, char *s)
 	int	i;
 
 	i = 0;
+	if (!*s)
+		return (-1);
 	while (env[i] != NULL)
 	{
 		if (f_strcmp(env[i], s) != -1)
@@ -296,7 +298,7 @@ int	expansion(t_data *data, char **env)
 	while (data->array[i] != NULL)
 	{
 		d = f_strchr(data->array[i], '$');
-		if (d != -1 && (f_strchr(data->array[i], '\'') == -1) && data->array[i][d + 1] != '?')
+		if (d != -1 && (f_strchr(data->array[i], '\'') == -1) && data->array[i][d + 1] != '?' && ft_strchr(data->array[i], '$') == NULL)
 		{
 			v = var_finder(env, data->array[i] + d + 1);
 			if (v == -1)
