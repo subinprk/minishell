@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   recur_tree_execute.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/08 17:25:00 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/10 13:41:47 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp, t_envp *env)
 		{
 			red_error_handle(cmd->left_child, pid);
 	 		print_error_cmd(cmd->left_child, envp);
-			exec(cmd->right_child->cmdstr, envp);
+			exec(cmd->right_child->cmdstr, envp, env);
 		}
 	}
 	else

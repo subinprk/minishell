@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:52:41 by irivero-          #+#    #+#             */
-/*   Updated: 2024/02/09 00:39:09 by ubuntu           ###   ########.fr       */
+/*   Updated: 2024/02/10 14:06:41 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	free_2d(char **arr);
 void	free_stdios(t_stdio *stdios);
 int		array_length_2d(char **array);
 char	**paths_array(char **envp);
-void	exec(char **cmd, char **env);
+void	exec(char **cmd, char **env, t_envp *envo);
 int		*token_data(char **chopped_str);
 int		find_pipe(int *token, int *i);
 int		find_redirection(int *token, int *i);
@@ -149,7 +149,6 @@ int		ft_strcmp(char *s1, char *s2);
 int		redirect_type(t_cmd *node);
 char	*command_path(char **path_array, int i, char *command);
 char	*path_pointer(char **envp, char *command);
-void	exec(char **cmd, char **env);
 void	search_tree(t_cmd *node, char **envp, t_envp *env);
 void	pipe_stdins(int *pipefd, t_stdio *stdios);
 void	pipe_stdouts(int *pipefd, t_stdio *stdios);

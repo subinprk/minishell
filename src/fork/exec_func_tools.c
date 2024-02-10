@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:05:19 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/09 16:17:17 by ubuntu           ###   ########.fr       */
+/*   Updated: 2024/02/10 14:06:36 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,19 @@ char	*path_pointer(char **envp, char *command)
 	return (NULL);
 }
 
-void	exec(char **cmd, char **env)
+void	exec(char **cmd, char **env, t_envp *envo)
 {
 	char	*path;
 	int		g_exit_status;
 
 	if (!cmd || !cmd[0])
 		exit(0);
-	//printf("cmd[0]: <%s>\n", cmd[0]);
 	if (access(cmd[0], X_OK) == 0)
 		path = cmd[0];
-	else
+	else if (var_finder(envo->envp, "PATH") != -1)
 		path = path_pointer(env, cmd[0]);
 	if (!path)
 		exit(2);
-	if (var_finder(env, "PATH") == -1)
-		exit(1);
 	g_exit_status = execve(path, cmd, env);
 	if (path)
 		free(path);
