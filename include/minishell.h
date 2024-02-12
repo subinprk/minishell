@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:52:41 by irivero-          #+#    #+#             */
-/*   Updated: 2024/02/12 14:37:38 by subpark          ###   ########.fr       */
+/*   Updated: 2024/02/12 15:11:42 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,8 @@ int		syntax_simple_redirect(char **cmd_line, int *i, t_cmd **node);
 t_cmd	*generate_tree_node(int node_type, int pipe_e);
 t_cmd	*generate_end_node(char **line, int node_type, int start, int end);
 void	replace_exit_status(char ***argv);
+void	syntax_pipe_error_print();
+void	syntax_pipe_i_update(int *i, int pipe_index, int tmp);
 
 // get_envpath.c
 char	**paths_array(char **envp);

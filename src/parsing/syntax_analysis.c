@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_analysis.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 03:40:29 by siun              #+#    #+#             */
-/*   Updated: 2024/02/08 17:21:58 by siun             ###   ########.fr       */
+/*   Updated: 2024/02/12 15:10:45 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ int	syntax_pipe(char **cmd_line, int *token, int *i, t_cmd **node)
 		i[1] = pipe_index;
 		if (pipe_index == i[0])
 		{
-			write(2, "syntax error near unexpected token '|'\n",
-				ft_strlen("syntax error near unexpected token '|'\n"));
-			g_exit_status = 1;
+			syntax_pipe_error_print();
 			return (-1);
 		}
 	}
@@ -35,8 +33,7 @@ int	syntax_pipe(char **cmd_line, int *token, int *i, t_cmd **node)
 		return (-1);
 	if (pipe_index != -1)
 	{
-		i[0] = pipe_index + 1;
-		i[1] = tmp;
+		syntax_pipe_i_update(i, pipe_index, tmp);
 		return (syntax_pipe(cmd_line, token, i, &((*node)->right_child)));
 	}
 	return (1);

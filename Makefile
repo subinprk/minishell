@@ -6,7 +6,7 @@
 #    By: subpark <subpark@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 16:59:02 by subpark           #+#    #+#              #
-#    Updated: 2024/02/12 13:00:05 by subpark          ###   ########.fr        #
+#    Updated: 2024/02/12 15:11:25 by subpark          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS = src/builtins/unset.c\
  src/parsing/syntax_analysis.c\
  src/parsing/tree_node_gen.c\
  src/parsing/argv_modification.c\
+ src/parsing/norminette_tools.c\
  src/tools/free_tools.c\
  src/tools/ft_strcmp.c\
  src/tools/get_envpath.c\
