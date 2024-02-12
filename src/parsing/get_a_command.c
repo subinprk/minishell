@@ -3,16 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   get_a_command.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 19:12:24 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/11 23:39:08 by ubuntu           ###   ########.fr       */
+/*   Updated: 2024/02/12 14:58:12 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //redirector, pipe, will be in other lexicon
 
 #include "../../include/minishell.h"
+
+void	freeing_norminette(char **chopped_str, int *token)
+{
+	free_2d(chopped_str);
+	free(token);
+}
 
 t_cmd	*extract_command(char *str, t_envp *env)
 {
@@ -27,15 +33,6 @@ t_cmd	*extract_command(char *str, t_envp *env)
 	cmd_tree = NULL;
 	chopped_str = input_validation(str, env->envp);
 	replace_exit_status(&chopped_str);
-
-	/* int j = 0;
-	while (chopped_str[j])
-	{
-		printf("chopped_str[%d]: %s\n", j, chopped_str[j]);
-		j++;
-	} */
-
-
 	if (!chopped_str)
 		return (NULL);
 	token = token_data(chopped_str);
@@ -49,9 +46,6 @@ t_cmd	*extract_command(char *str, t_envp *env)
 		free_tree(cmd_tree);
 		return (NULL);
 	}
-	//printf("chopped_str: %s\n", cmd_tree->cmdstr[1]);
-	free_2d(chopped_str);
-	free(token);
+	freeing_norminette(chopped_str, token);
 	return (cmd_tree);
 }
-
