@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:48:01 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/09 00:38:19 by ubuntu           ###   ########.fr       */
+/*   Updated: 2024/02/12 14:46:57 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@ int		g_exit_status = 0;
 
 char    *print_prompt(void)
 {
-        char    *cwd;
-        int     i;
-        cwd = malloc(1024 * sizeof(char));
-        getcwd(cwd, 1024);
-        i = f_strlen(cwd);
-        cwd[i] = ' ';
-        cwd[i + 1] = '\0';
-        return (cwd);
+	char	*cwd;
+	int		i;
+
+	cwd = malloc(1024 * sizeof(char));
+	getcwd(cwd, 1024);
+	i = f_strlen(cwd);
+	cwd[i] = ' ';
+	cwd[i + 1] = '\0';
+	return (cwd);
 }
 
 void	interactive_mode(t_cmd **tree, char **envp, t_envp *env)
@@ -47,6 +48,7 @@ void	interactive_mode(t_cmd **tree, char **envp, t_envp *env)
 		wait_each_commands(*tree);
 		free_tree(*tree);
 		free(tmp);
+		free(cwd);
 	}
 }
 
