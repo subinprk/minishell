@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 19:12:24 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/12 14:58:12 by subpark          ###   ########.fr       */
+/*   Updated: 2024/02/12 15:01:27 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,9 @@ t_cmd	*extract_command(char *str, t_envp *env)
 	i[1] = token_length(token);
 	tmp = syntax_pipe(chopped_str, token, i, &cmd_tree);
 	if (tmp == -1)
-	{
 		free_tree(cmd_tree);
+	if (tmp == -1)
 		return (NULL);
-	}
 	freeing_norminette(chopped_str, token);
 	return (cmd_tree);
 }
