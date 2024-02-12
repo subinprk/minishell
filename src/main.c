@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:48:01 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/12 14:46:57 by subpark          ###   ########.fr       */
+/*   Updated: 2024/02/12 14:50:34 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		g_exit_status = 0;
 
-char    *print_prompt(void)
+char	*print_prompt(void)
 {
 	char	*cwd;
 	int		i;
@@ -31,8 +31,8 @@ void	interactive_mode(t_cmd **tree, char **envp, t_envp *env)
 {
 	char	*tmp;
 	char	*cwd;
-	env->cd_hist = NULL;
 
+	env->cd_hist = NULL;
 	while (1)
 	{
 		set_signals_interactive(-1);
@@ -44,7 +44,7 @@ void	interactive_mode(t_cmd **tree, char **envp, t_envp *env)
 		*tree = extract_command(tmp, env);
 		search_tree(*tree, envp, env);
 		printf("exit status %d\n", g_exit_status);
-		write(1,"\0",1);
+		write(1, "\0", 1);
 		wait_each_commands(*tree);
 		free_tree(*tree);
 		free(tmp);
@@ -52,7 +52,8 @@ void	interactive_mode(t_cmd **tree, char **envp, t_envp *env)
 	}
 }
 
-void	non_interactive_mode(t_cmd **tree, char *input, char **envp, t_envp *env)
+void	non_interactive_mode(t_cmd **tree, char *input, char **envp
+		, t_envp *env)
 {
 	char	**user_inputs;
 	int		i;
@@ -69,7 +70,7 @@ void	non_interactive_mode(t_cmd **tree, char *input, char **envp, t_envp *env)
 	free_2d(user_inputs);
 }
 
-int main(int argc, char **argv, char **envs)
+int	main(int argc, char **argv, char **envs)
 {
 	t_cmd	*tree;
 	t_envp	env;
