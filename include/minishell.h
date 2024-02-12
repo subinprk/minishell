@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:52:41 by irivero-          #+#    #+#             */
-/*   Updated: 2024/02/10 14:06:41 by ubuntu           ###   ########.fr       */
+/*   Updated: 2024/02/12 13:12:37 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,9 @@ extern int	g_exit_status;
 //builtins
 
 //cd
-int		cd_to_home_directory(char *current_path, char **cmdline, char **envs);
-int		cd_to_env_variable(char *current_path, char **cmdline, char **envs);
-void	update_pwd_variables(char **envs);
 void    change_directory(char **paths, t_envp *env);
 
 //echo
-void	exit_status(void);
-void	echo_env_variable(char **cmdline, char **envs, int i);
-int		is_option_n(char *token);
 void	our_echo(char **av);
 int	f_strchr(char *s, char c);
 int	f_strcmp(char *s1, char *s2);
@@ -163,6 +157,10 @@ void	connect_last_out(t_stdio *last_out);
 void	connect_last_in(t_stdio *last_in);
 void	write_pipefd(int pipefd[2],int *old_input, int pipe_exist);
 void	wait_each_commands(t_cmd *tree);
+void	pid_zero_exec(t_cmd *cmd, char **envp, t_envp *env);
+void	pid_pid_builtin(t_cmd *cmd, t_envp *env);
+void	pid_pid_waiting(t_stdio **stdios);
+int		red_error_handle(t_cmd *type, pid_t pid);
 
 //parsing
 char	**chopping_str(char *str);
