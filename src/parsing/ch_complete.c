@@ -204,30 +204,6 @@ int	word_counter(const char* str) {
 	return count;
 }
 
- /* int	f_strchr(char *s, char c)
-{
-	int	i = 0;
-	while (s[i] != c && s[i] != '\0')
-		i++;
-	if (s[i] == '\0')
-		return (-1);
-	return (i);
-}
-
-int	f_strcmp(char *s1, char *s2)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (s1[i] != '\0' && s2[i] != '\0')
-	{
-		if (s1[i] != s2[i])
-			return (-1);
-		i++;
-	}
-	return (0);
-} */
-
 int	var_finder(char **env, char *s)
 {
 	int	i;
@@ -298,7 +274,7 @@ int	expansion(t_data *data, char **env)
 	while (data->array[i] != NULL)
 	{
 		d = f_strchr(data->array[i], '$');
-		if (d != -1 && (f_strchr(data->array[i], '\'') == -1) && data->array[i][d + 1] != '?' && ft_strchr(data->array[i], '$') == NULL)
+		if (d != -1 && (f_strchr(data->array[i], '\'') == -1) && data->array[i][d + 1] != '?' && ft_strchr(data->array[i] + 1, '$') == NULL)
 		{
 			v = var_finder(env, data->array[i] + d + 1);
 			if (v == -1)

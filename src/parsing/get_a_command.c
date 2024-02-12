@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 19:12:24 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/09 03:10:24 by ubuntu           ###   ########.fr       */
+/*   Updated: 2024/02/11 23:39:08 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ t_cmd	*extract_command(char *str, t_envp *env)
 	cmd_tree = NULL;
 	chopped_str = input_validation(str, env->envp);
 	replace_exit_status(&chopped_str);
+
+	/* int j = 0;
+	while (chopped_str[j])
+	{
+		printf("chopped_str[%d]: %s\n", j, chopped_str[j]);
+		j++;
+	} */
+
+
 	if (!chopped_str)
 		return (NULL);
 	token = token_data(chopped_str);

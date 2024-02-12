@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   recur_tree_execute.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/12 13:12:31 by subpark          ###   ########.fr       */
+/*   Updated: 2024/02/10 13:41:47 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	red_error_handle(t_cmd *type, pid_t pid)
 {
-	if (type->cmdstr[0][0] == '<' || type->cmdstr[0][0] == '>')
+	if (type->cmdstr[0][0] == '<' || type->cmdstr[0][0] =='>')
 	{
 		g_exit_status = 0;
 		if (pid == 0)
@@ -23,11 +23,10 @@ int	red_error_handle(t_cmd *type, pid_t pid)
 			return (1);
 	}
 	else
-		return (0);
+		return(0);
 }
 
-void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp
-		, t_envp *env)
+void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp, t_envp *env)
 {
 	int				pipefd[2];
 	static int		old_input = -1;
@@ -43,16 +42,34 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp
 		set_signals_interactive(pid);
 		update_redirfd(*stdios);
 		update_pipefd(pipefd, old_input, cmd->pipe_exist);
-		pid_zero_exec(cmd, envp, env);
+		if (check_builtin(cmd->left_child))
+			builtin_action(cmd->right_child, cmd->right_child->cmdstr, env);
+		else
+		{
+			red_error_handle(cmd->left_child, pid);
+	 		print_error_cmd(cmd->left_child, envp);
+			exec(cmd->right_child->cmdstr, envp, env);
+		}
 	}
 	else
 	{
 		set_signals_interactive(pid);
 		if (red_error_handle(cmd->left_child, pid))
 			return ;
-		pid_pid_builtin(cmd, env);
+		if (!ft_strcmp(cmd->right_child->cmdstr[0], "exit"))
+			exit_command(cmd->right_child->cmdstr);
+		else if (!ft_strcmp(cmd->right_child->cmdstr[0], "unset"))
+			ft_unset(cmd->right_child->cmdstr[1], env);
+		else if (!ft_strcmp(cmd->right_child->cmdstr[0], "export"))
+			export(cmd->right_child->cmdstr + 1, env);
+		else if (!ft_strcmp(cmd->right_child->cmdstr[0], "cd"))
+			change_directory(cmd->right_child->cmdstr, env);
 		write_pipefd(pipefd, &old_input, cmd->pipe_exist);
-		pid_pid_waiting(stdios);
+		waitpid(-1, &g_exit_status, WNOHANG);
+		if (find_last_in(*(stdios))!= NULL && find_last_in(*(stdios))->re_type == REL_TYPE_LL)
+			waitpid(-1, &g_exit_status, 0);
+		else
+			free_stdios(*stdios);
 		*stdios = NULL;
 	}
 }

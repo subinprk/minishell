@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: subpark <subpark@student.42.fr>            +#+  +:+       +#+         #
+#    By: siun <siun@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/21 16:59:02 by subpark           #+#    #+#              #
-#    Updated: 2024/02/12 13:00:05 by subpark          ###   ########.fr        #
+#    Updated: 2024/02/08 16:54:19 by siun             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ SRCS = src/builtins/unset.c\
  src/fork/simple_cmd_stdins.c\
  src/fork/simple_cmd_stdouts.c\
  src/fork/simple_cmd_tools.c\
- src/fork/simple_cmd_pid.c\
  src/fork/wait_commands.c\
  src/parsing/ch_complete.c\
  src/parsing/get_a_command.c\
