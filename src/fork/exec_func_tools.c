@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_func_tools.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:05:19 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/10 14:06:36 by ubuntu           ###   ########.fr       */
+/*   Updated: 2024/02/12 13:07:18 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	exec(char **cmd, char **env, t_envp *envo)
 
 	if (!cmd || !cmd[0])
 		exit(0);
+	path = NULL;
 	if (access(cmd[0], X_OK) == 0)
 		path = cmd[0];
 	else if (var_finder(envo->envp, "PATH") != -1)
