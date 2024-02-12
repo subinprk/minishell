@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:53:44 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/12 13:12:31 by subpark          ###   ########.fr       */
+/*   Updated: 2024/02/12 14:30:46 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,16 @@ void	execute_simple_cmd(t_cmd *cmd, t_stdio **stdios, char **envp
 	}
 	else
 	{
-		set_signals_interactive(pid);
-		if (red_error_handle(cmd->left_child, pid))
-			return ;
-		pid_pid_builtin(cmd, env);
+		pid_pid_builtin_n_set(cmd, env);
 		write_pipefd(pipefd, &old_input, cmd->pipe_exist);
 		pid_pid_waiting(stdios);
-		*stdios = NULL;
 	}
 }
 
 void	execute_simple_redirect(t_cmd *node, t_stdio **stdios)
 {
 	t_stdio	*redirection;
-	t_stdio *curr;
+	t_stdio	*curr;
 
 	redirection = (t_stdio *)malloc(sizeof(t_stdio));
 	if (*stdios == NULL)

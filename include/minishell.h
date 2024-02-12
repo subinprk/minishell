@@ -6,7 +6,7 @@
 /*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:52:41 by irivero-          #+#    #+#             */
-/*   Updated: 2024/02/12 13:12:37 by subpark          ###   ########.fr       */
+/*   Updated: 2024/02/12 14:31:02 by subpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void	connect_last_in(t_stdio *last_in);
 void	write_pipefd(int pipefd[2],int *old_input, int pipe_exist);
 void	wait_each_commands(t_cmd *tree);
 void	pid_zero_exec(t_cmd *cmd, char **envp, t_envp *env);
-void	pid_pid_builtin(t_cmd *cmd, t_envp *env);
+void	pid_pid_builtin_n_set(t_cmd *cmd, t_envp *env);
 void	pid_pid_waiting(t_stdio **stdios);
 int		red_error_handle(t_cmd *type, pid_t pid);
 
