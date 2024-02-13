@@ -115,11 +115,5 @@ void	replace_exit_status(char ***argv)
 		i++;
 	}
 	free(status);
-	int	k = 0;
-	while ((*argv)[k])
-	{
-		printf("argv[%d] : %s\n", k, (*argv)[k]);
-		k++;
-	}
 	return ;
 }
