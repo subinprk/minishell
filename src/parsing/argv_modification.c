@@ -6,7 +6,7 @@
 /*   By: ubuntu <ubuntu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 05:53:16 by siun              #+#    #+#             */
-/*   Updated: 2024/02/12 13:34:50 by ubuntu           ###   ########.fr       */
+/*   Updated: 2024/02/12 20:31:08 by ubuntu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,52 +33,41 @@
 	}
 } */
 
-void	coppying(char **tmp, char *status)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	while ((*tmp)[i])
-		i++;
-	while (status[j])
-	{
-		(*tmp)[i] = status[j];
-		i++;
-		j++;
-	}
-	(*tmp)[i] = 0;
-	return ;
-}
-
-char	*f_strjoin(char **s1, char const *s2)
+char	*f_strjoin(char *s, char c)
 {
 	char	*str;
-	int		i1;
-	int		i2;
+	int		i;
 
-	i1 = 0;
-	i2 = 0;
-	str = (char *) malloc((ft_strlen(*s1) + ft_strlen(s2)) * sizeof(char) + 1);
+	i = 0;
+	str = malloc((ft_strlen(s) + 2) * sizeof(char));
 	if (!str)
 		return (NULL);
-	while (*s1[i1])
+	while (s[i])
 	{
-		str[i1] = *s1[i1];
-		i1 ++;
+		str[i] = s[i];
+		i ++;
 	}
-	while (s2[i2])
-	{
-		str[i1 + i2] = s2[i2];
-		i2 ++;
-	}
-	str[i1 + i2] = '\0';
-			printf("its here str: %s\n", str);
-	if (*s1 && (*s1[0]))
-		free(*s1);
-	//free(*s1);
-	(*s1) = str;
+	str[i] = c;
+	str[i + 1] = 0;
+	if (i > 0)
+		free(s);
+	return (str);
+}
+
+char	*strrjoin(char *s1, char *s2)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	if (!s1)
+		return(s2);
+	else
+		while (s2 && s2[i])
+		{
+			str = f_strjoin(s1, s2[i]);
+			i++;
+		}
 	return (str);
 }
 
@@ -89,24 +78,21 @@ void	replace_exit_status(char ***argv)
 	int		flag;
 	char 	*tmp;
 	char	*status;
-	char	*c;
 
 	i = 0;
 	j = 0;
 	flag = 0;
-	c = malloc(3 * sizeof(char *));
-	c[1] = '\0';
 	status = ft_itoa(g_exit_status);
 	if ((*argv) == NULL || (**argv) == NULL)
 		return ;
 	while ((*argv)[i])
 	{
 		tmp = "\0";
-		while ((*argv)[i][j] && f_strchr((*argv)[i], '$') != -1)
+		while ((*argv)[i][j] && f_strchr((*argv)[i] + j, '$') != -1)
 		{
 			if ((*argv)[i][j] && (*argv)[i][j] == '$' && (*argv)[i][j + 1] == '?')
 			{
-				tmp = ft_strjoin(tmp, status);
+				tmp = strrjoin(tmp, status);
 				flag = 1;
 				j += 2;
 			}
@@ -114,8 +100,7 @@ void	replace_exit_status(char ***argv)
 				break ;
 			else
 			{
-				c[0] = (*argv)[i][j];
-				tmp = ft_strjoin(tmp, c);
+				tmp = f_strjoin(tmp, (*argv)[i][j]);
 				j++;
 			}
 		}
@@ -128,6 +113,13 @@ void	replace_exit_status(char ***argv)
 		}
 		j = 0;
 		i++;
+	}
+	free(status);
+	int	k = 0;
+	while ((*argv)[k])
+	{
+		printf("argv[%d] : %s\n", k, (*argv)[k]);
+		k++;
 	}
 	return ;
 }
