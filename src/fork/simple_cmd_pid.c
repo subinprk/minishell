@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd_pid.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:44:33 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/12 14:30:22 by subpark          ###   ########.fr       */
+/*   Updated: 2024/02/14 21:48:08 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,27 @@ void	pid_pid_builtin_n_set(t_cmd *cmd, t_envp *env)
 	if (red_error_handle(cmd->left_child, 1))
 		return ;
 	if (!ft_strcmp(cmd->right_child->cmdstr[0], "exit"))
+	{
 		exit_command(cmd->right_child->cmdstr);
+		return ;
+	}
 	else if (!ft_strcmp(cmd->right_child->cmdstr[0], "unset"))
+	{
 		ft_unset(cmd->right_child->cmdstr[1], env);
+		return ;
+	}
 	else if (!ft_strcmp(cmd->right_child->cmdstr[0], "export"))
+	{
 		export(cmd->right_child->cmdstr + 1, env);
+		return ;
+	}
 	else if (!ft_strcmp(cmd->right_child->cmdstr[0], "cd"))
+	{
 		change_directory(cmd->right_child->cmdstr, env);
+		return ;
+	}
+	if (access(cmd->right_child->cmdstr[0], X_OK) != 0)
+		g_exit_status = 127;
 }
 
 void	pid_pid_waiting(t_stdio **stdios)
