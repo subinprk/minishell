@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: subpark <subpark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siun <siun@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:48:01 by subpark           #+#    #+#             */
-/*   Updated: 2024/02/12 14:50:34 by subpark          ###   ########.fr       */
+/*   Updated: 2024/02/14 21:52:02 by siun             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	interactive_mode(t_cmd **tree, char **envp, t_envp *env)
 			exit(0);
 		*tree = extract_command(tmp, env);
 		search_tree(*tree, envp, env);
-		printf("exit status %d\n", g_exit_status);
 		write(1, "\0", 1);
 		wait_each_commands(*tree);
 		free_tree(*tree);
