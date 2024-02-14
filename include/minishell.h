@@ -75,6 +75,15 @@ typedef struct s_envp
 	char	*cd_hist;
 }	t_envp;
 
+typedef struct s_data
+{
+	int		word_count;
+	int		sqn;
+	int		dqn;
+	char	**array;
+	char	*tmp;
+}	t_data;
+
 extern int	g_exit_status;
 
 //builtins
@@ -160,7 +169,7 @@ int		syntax_redirects(char **cmd_line, int *token, int *i, t_cmd **node);
 int		syntax_simple_redirect(char **cmd_line, int *i, t_cmd **node);
 t_cmd	*generate_tree_node(int node_type, int pipe_e);
 t_cmd	*generate_end_node(char **line, int node_type, int start, int end);
-void	replace_exit_status(char ***argv);
+void	replace_exit_status(char ***argv, int i, int flag, int j);
 void	syntax_pipe_error_print();
 void	syntax_pipe_i_update(int *i, int pipe_index, int tmp);
 
@@ -176,8 +185,30 @@ void	set_signals_interactive(pid_t pid);
 char	*print_prompt(void);
 void	signal_parent_handle(void);
 
-// ch_complete.c (FERDAWS)
+// ch_complete.c
+int	if_tmp_null(t_data *data, char *tmp, int i, int k);
+int	ft_chopper(t_data *data, char *tmp, int k);
+void	else_if_str(int *inquotes, int *count, int *inword);
+int	word_counter(const char *str, int count, int inword, int inquotes);
 char	**input_validation(char *tmp, char **env);
-int		var_finder(char **env, char *s);
+
+// ch_com_expan
+int	expansion(t_data *data, char **env, int i);
+void	single_quote_case(t_data *data, int i);
+char	*str_quo_modifier(char *str);
+int	var_finder(char **env, char *s);
+char	*str_modifier(char *str, char *var, int d);
+
+// ch_complete2.c
+int	quo_num(char *tmp, t_data *data);
+int	if_sstr_zero(char *sstr);
+int	quo_arrangement(char *str, int i);
+int	quo_order(char *tmp, t_data *data, int i, int k);
+int	ft_strcpy(t_data *data, char *tmp, int len, int k);
+
+// ch_complete3.c
+char	*ifhelper(t_data *data, char *tmp, int i, int k);
+char	*elsehelper(t_data *data, char *tmp, int i, int k);
+void	while_function(char *tmp, int *i);
 
 #endif

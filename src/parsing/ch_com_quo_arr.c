@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void	quote_loop(char *str, char **sstr, int *i, int *k)
+/* void	quote_loop(char *str, char **sstr, int *i, int *k)
 {
 	while (str[*i])
 	{
@@ -56,3 +56,4 @@ int	quo_arrangement(char *str)
 	free(sstr);
 	return (0);
 }
+ */
