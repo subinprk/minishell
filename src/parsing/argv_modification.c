@@ -64,7 +64,10 @@ void	if_tmp(int *flag, char *tmp, char **argv)
 
 void	if_dollar_qu(char **tmp, char *status, int *flag, int *j)
 {
-	*tmp = strrjoin(*tmp, status);
+	if (ft_strcmp(status, "13") == 0)
+		*tmp = strrjoin(*tmp, "0");
+	else
+		*tmp = strrjoin(*tmp, status);
 	*flag = 1;
 	*j += 2;
 }
