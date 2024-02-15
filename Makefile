@@ -37,6 +37,9 @@ SRCS = src/builtins/unset.c\
  src/fork/simple_cmd_pid.c\
  src/fork/wait_commands.c\
  src/parsing/ch_complete.c\
+ src/parsing/ch_com_expan.c\
+ src/parsing/ch_complete2.c\
+ src/parsing/ch_complete3.c\
  src/parsing/get_a_command.c\
  src/parsing/lexical_analysis.c\
  src/parsing/syntax_analysis.c\

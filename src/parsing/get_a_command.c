@@ -32,7 +32,7 @@ t_cmd	*extract_command(char *str, t_envp *env)
 		return (NULL);
 	cmd_tree = NULL;
 	chopped_str = input_validation(str, env->envp);
-	replace_exit_status(&chopped_str);
+	replace_exit_status(&chopped_str, 0, 0, 0);
 	if (!chopped_str)
 		return (NULL);
 	token = token_data(chopped_str);

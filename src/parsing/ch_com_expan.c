@@ -37,27 +37,37 @@ char	*str_modifier(char *str, char *var, int d)
 	return (tmp);
 }
 
-char	*str_modifier(char *str, char *var, int d)
+int	var_finder(char **env, char *s)
 {
-	int		eq;
+	int	i;
+
+	i = 0;
+	if (!*s)
+		return (-1);
+	while (env[i] != NULL)
+	{
+		if (f_strcmp(env[i], s) != -1)
+			return (i); 
+		i++;
+	}
+	return (-1);
+}
+
+char	*str_quo_modifier(char *str)
+{
+	int		k;
 	int		i;
 	char	*tmp;
 
 	i = 0;
-	eq = f_strchr(var, '=') + 1;
-	tmp = malloc((f_strlen(var + eq) + d + 1) * sizeof(char));
-	while (i < d)
+	k = f_strlen(str);
+	tmp = malloc((k - 1) * sizeof(char));
+	str[k - 1] = '\0';
+	while (str[i] != '\0')
 	{
-		tmp[i] = str[i];
+		tmp[i] = str[i + 1];
 		i++;
 	}
-	while (var[eq] != '\0')
-	{
-		tmp[i] = var[eq];
-		i++;
-		eq++;
-	}
-	tmp[i] = '\0';
 	free(str);
 	return (tmp);
 }
@@ -66,22 +76,20 @@ void	single_quote_case(t_data *data, int i)
 {
 	data->array[i] = str_quo_modifier(data->array[i]);
 	if (data->array[i] == NULL)
-		return (-1);
+		return ;
 }
 
-// int	condition_double_
-
-int	expansion(t_data *data, char **env)
+int	expansion(t_data *data, char **env, int i)
 {
-	int	i;
 	int	d;
 	int	v;
 
-	i = 0;
 	while (data->array[i] != NULL)
 	{
 		d = f_strchr(data->array[i], '$');
-		if (d != -1 && (f_strchr(data->array[i], '\'') == -1) && data->array[i][d + 1] != '?' && ft_strchr(data->array[i] + 1, '$') == NULL)
+		if (d != -1 && (f_strchr(data->array[i], '\'') == -1)
+			&& data->array[i][d + 1] != '?'
+			&& ft_strchr(data->array[i] + 1, '$') == NULL)
 		{
 			v = var_finder(env, data->array[i] + d + 1);
 			if (v == -1)

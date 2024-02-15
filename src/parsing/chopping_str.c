@@ -46,12 +46,12 @@ char	*line_by_line(char *str, int *i)
 	while (str[*i])
 	{
 		if (str[*i] == ' ')
-			(*i) ++;
-		else if (str[*i] == '\'' &&  str[(*i) ++] > -1)
+			(*i)++;
+		else if (str[*i] == '\'' && str[(*i)++] > -1)
 			return (ft_strdup("'"));
-		else if (str[*i] == '"' &&  str[(*i) ++] > -1)
+		else if (str[*i] == '"' && str[(*i)++] > -1)
 			return (ft_strdup("\""));
-		else if (str[*i] == '|' &&  str[(*i) ++] > -1)
+		else if (str[*i] == '|' && str[(*i)++] > -1)
 			return (ft_strdup("|"));
 		else if ((str[*i] == '<' || str[*i] == '>'))
 		{
