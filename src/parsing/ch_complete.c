@@ -102,7 +102,6 @@ char	**input_validation(char *tmp, char **env)
 	if (quo_num(tmp, &data) == -1)
 		return (NULL);
 	data.word_count = word_counter(data.tmp, 0, 0, 0);
-	printf("word_count: %i\n", data.word_count);
 	if (data.word_count == 0)
 		return (NULL);
 	if (data.sqn + data.dqn > 0)

@@ -43,7 +43,6 @@ void	interactive_mode(t_cmd **tree, char **envp, t_envp *env)
 			exit(0);
 		*tree = extract_command(tmp, env);
 		search_tree(*tree, envp, env);
-		printf("exit status %d\n", g_exit_status);
 		write(1, "\0", 1);
 		wait_each_commands(*tree);
 		free_tree(*tree);
