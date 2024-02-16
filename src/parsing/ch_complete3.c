@@ -45,3 +45,15 @@ void	while_function(char *tmp, int *i)
 		&& tmp[*i] != '<' && tmp[*i] != '>' && tmp[*i] != '|')
 		*i += 1;
 }
+
+char	*status_ret(void)
+{
+	char	*status;
+	if (g_exit_status == 512)
+		status = ft_itoa(2);
+	else if (g_exit_status == 256)
+		status = ft_itoa(1);
+	else
+		status = ft_itoa(g_exit_status);
+	return (status);
+}

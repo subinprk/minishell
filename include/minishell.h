@@ -210,5 +210,6 @@ int		ft_strcpy(t_data *data, char *tmp, int len, int k);
 char	*ifhelper(t_data *data, char *tmp, int i, int k);
 char	*elsehelper(t_data *data, char *tmp, int i, int k);
 void	while_function(char *tmp, int *i);
+char	*status_ret(void);
 
 #endif

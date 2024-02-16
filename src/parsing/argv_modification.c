@@ -18,7 +18,7 @@ char	*f_strjoin(char *s, char c)
 	int		i;
 
 	i = 0;
-	str = malloc((ft_strlen(s) + 2) * sizeof(char));
+	str = malloc((f_strlen(s) + 2) * sizeof(char));
 	if (!str)
 		return (NULL);
 	while (s[i])
@@ -43,7 +43,7 @@ char	*strrjoin(char *s1, char *s2)
 	{
 		while (s2 && s2[i])
 		{
-			str = f_strjoin(s1, s2[i]);
+			str = f_strjoin(s1 + f_strlen(s1), s2[i]);
 			i++;
 		}
 	}
@@ -57,7 +57,7 @@ void	if_tmp(int *flag, char *tmp, char **argv)
 		*flag = 0;
 		free((*argv));
 		(*argv) = ft_strdup(tmp);
-		free(tmp);
+		//free(tmp);
 	}
 	return ;
 }
@@ -77,12 +77,12 @@ void	replace_exit_status(char ***argv, int i, int flag, int j)
 	char	*tmp;
 	char	*status;
 
-	status = ft_itoa(g_exit_status);
+	status = status_ret();
 	if ((*argv) == NULL || (**argv) == NULL)
 		return ;
 	while ((*argv)[i])
 	{
-		tmp = "\0";
+		tmp = NULL;
 		while ((*argv)[i][j] && f_strchr((*argv)[i], '$') != -1)
 		{
 			if ((*argv)[i][j] && (*argv)[i][j] == '$'
