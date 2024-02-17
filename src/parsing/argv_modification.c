@@ -43,7 +43,7 @@ char	*strrjoin(char *s1, char *s2)
 	{
 		while (s2 && s2[i])
 		{
-			str = f_strjoin(s1 + f_strlen(s1), s2[i]);
+			str = f_strjoin(s1, s2[i]);
 			i++;
 		}
 	}
@@ -57,7 +57,6 @@ void	if_tmp(int *flag, char *tmp, char **argv)
 		*flag = 0;
 		free((*argv));
 		(*argv) = ft_strdup(tmp);
-		//free(tmp);
 	}
 	return ;
 }
@@ -83,7 +82,8 @@ void	replace_exit_status(char ***argv, int i, int flag, int j)
 	while ((*argv)[i])
 	{
 		tmp = NULL;
-		while ((*argv)[i][j] && f_strchr((*argv)[i], '$') != -1)
+		while ((*argv)[i][j] && f_strchr((*argv)[i], '$') != -1
+			&& f_strchr((*argv)[i], '?') != -1)
 		{
 			if ((*argv)[i][j] && (*argv)[i][j] == '$'
 			&& (*argv)[i][j + 1] == '?')

@@ -113,6 +113,7 @@ char	**input_validation(char *tmp, char **env)
 	if (expansion(&data, env, 0) == -1)
 		return (NULL);
 	return (data.array);
+	//printf("kommt er bis hier?\n");
 }
 
 /*int	main(int ac, char **av, char **env)
