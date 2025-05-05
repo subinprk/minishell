@@ -1,12 +1,12 @@
-# 🐚 minishell — A Tiny Bash-like Shell in C
+# minishell — A Tiny Bash-like Shell in C
 
 A minimalist shell built from scratch using C. It features a Bash-like interface, command parsing into an execution tree, process management, and signal handling — all with no external shell libraries.
 
-![minishell screenshot](./minishell_terminal.png)
+![image](https://github.com/user-attachments/assets/bd3e492f-6fa7-4229-be41-eb3d108a75e9)
 
 ---
 
-## 🧠 Project Overview
+## Project Overview
 
 This 42 project aims to reimplement a simplified Bash shell with:
 
@@ -20,31 +20,31 @@ This 42 project aims to reimplement a simplified Bash shell with:
 
 ---
 
-## 🛠️ Features
+## Features
 
-- ✅ Custom lexer and parser turning user input into an AST
-- ✅ Redirections: `<`, `>`, `<<`, `>>`
-- ✅ Piping using `|`
-- ✅ Environment variable expansion (`$VAR`, `$?`)
-- ✅ Built-in commands: `echo`, `cd`, `pwd`, `export`, `unset`, `env`, `exit`
-- ✅ Signal handling: `Ctrl+C`, `Ctrl+D`, `Ctrl+\`
-- ✅ Command history using `readline()`
+-  Custom lexer and parser turning user input into an AST
+-  Redirections: `<`, `>`, `<<`, `>>`
+-  Piping using `|`
+-  Environment variable expansion (`$VAR`, `$?`)
+-  Built-in commands: `echo`, `cd`, `pwd`, `export`, `unset`, `env`, `exit`
+-  Signal handling: `Ctrl+C`, `Ctrl+D`, `Ctrl+\`
+-  Command history using `readline()`
 
 ---
 
-## 🔧 Build & Run
+## Build & Run
 
-### 🔨 Compile
+### Compile
 
 ```bash
 make
 ```
-### 🚀 Run
+### Run
 ```
 ./minishell
 ```
 Type any valid Bash command (or one of the builtins), and the shell will evaluate it just like Bash would.
-### 🌲 Execution Tree
+### Execution Tree
 
 Commands like:
 ```
@@ -58,9 +58,13 @@ Are parsed into an internal binary tree that allows recursive execution:
      / \
   ls   grep
 ```
+![image](https://github.com/user-attachments/assets/d6af31a2-243b-4ee5-8a72-4609eea5a81c)
+
+![image](https://github.com/user-attachments/assets/df147c1c-75be-412e-8922-c17331126b13)
+
 
 This design helped decouple parsing from execution and simplified support for future logical operators like &&, ||.
-### 🧩 Key Components
+## Key Components
 Component	Description
 Lexer	Tokenizes input with support for quotes and escapes
 Parser	Builds binary tree based on operator precedence
@@ -68,7 +72,7 @@ Executor	Walks tree and sets up pipes/forks accordingly
 Signal	Handles SIGINT, SIGQUIT cleanly
 Redir	Manages I/O redirection and heredocs
 Env	Maintains shell environment state dynamically
-### 📚 What I Learned
+## What I Learned
 
   - Parsing shell grammar into a binary execution tree
   - Handling fork/execve, dup2, and file descriptors manually
@@ -76,16 +80,15 @@ Env	Maintains shell environment state dynamically
   - Synchronizing signals and state without global data
   - Debugging interleaved processes and subtle shell behaviors
 
-📸 Screenshot
 
-🔮 Future Work
+## Future Work
 
   - Implement logical operators (&&, ||)
   - Add wildcard (*) expansion
   - Improve heredoc memory and history handling
   - Add job control features (fg, bg, jobs)
 
-📄 License
+## License
 
 This project is part of the 42 curriculum and is distributed for educational purposes only.
 
