@@ -58,9 +58,11 @@ Are parsed into an internal binary tree that allows recursive execution:
      / \
   ls   grep
 ```
-![image](https://github.com/user-attachments/assets/d6af31a2-243b-4ee5-8a72-4609eea5a81c)
 
-![image](https://github.com/user-attachments/assets/df147c1c-75be-412e-8922-c17331126b13)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/df147c1c-75be-412e-8922-c17331126b13" width="60%" />
+  <img src="https://github.com/user-attachments/assets/d6af31a2-243b-4ee5-8a72-4609eea5a81c" width="30%" />
+</p>
 
 
 This design helped decouple parsing from execution and simplified support for future logical operators like &&, ||.
